@@ -81,13 +81,13 @@ class StaticController extends CController
 
             case "director":
 
+
                 $this->courSection = "guest-book";
                 $this->title = "Обращение к директору";
                 $this->description = "Обращение к директору";
 
                 if (Yii::app()->request->isPostRequest) {
-
-
+                    $this->sendMail();
                 }
 
                 $this->section = "guest-book"; $this->isMain=true; $this->render("director");
@@ -125,6 +125,74 @@ class StaticController extends CController
         $this->renderPartial("/error/index");
     }
 
+
+    private function toArray($secret,$response)
+    {
+        $params = array('secret' => $secret, 'response' => $response);
+
+        return $params;
+    }
+
+    private  function  checkReCaptcha()
+    {
+
+
+        /* $peer_key = version_compare(PHP_VERSION, '5.6.0', '<') ? 'CN_name' : 'peer_name';
+        $options = array(
+            'http' => array(
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'POST',
+                'content' => http_build_query(array('secret' => "6LdCWRoTAAAAAEPizgC2ZzZNdqllbdiei8gml9go", 'response' => $_POST["g-recaptcha-response"]), '', '&'),
+                // Force the peer to validate (not needed in 5.6.0+, but still works
+                'verify_peer' => true,
+                // Force the peer validation to use www.google.com
+                $peer_key => 'www.google.com',
+            ),
+        );
+        $context = stream_context_create($options);
+
+        $p = file_get_contents("https://www.google.com/recaptcha/api/siteverify", false);
+     print_r($p); */
+        return true;
+
+
+        }
+
+
+    public function sendMail(){
+      if ($this->checkReCaptcha()) {
+
+
+
+            $__smtp=Yii::app()->params['smtp'];
+
+            Yii::app()->mailer->Host = $__smtp['host'];
+            Yii::app()->mailer->Port = $__smtp['port'];
+            Yii::app()->mailer->IsSMTP();
+
+
+            Yii::app()->mailer->Subject = "Обращение к директору с сайта yustk.com";
+            Yii::app()->mailer->SMTPAuth = $__smtp['auth'];
+            Yii::app()->mailer->Username = $__smtp['username'];
+            Yii::app()->mailer->Password = $__smtp['password'];
+            Yii::app()->mailer->SMTPDebug = $__smtp['debug'];
+            Yii::app()->mailer->From = $__smtp['from'];
+            Yii::app()->mailer->FromName = $__smtp['fromname'];
+            Yii::app()->mailer->AddAddress("bablgum@mail.ru"); //bablgum@mail.ru
+
+            Yii::app()->mailer->MsgHTML($this->renderPartial(Yii::app()->mailer->pathViews, array('post'=>$_POST["mail"]),true));
+            Yii::app()->mailer->CharSet = "windows-1251";
+            if(Yii::app()->mailer->send()){
+               echo "<script>alert('Ваше сообщение отправлено директору ООО ЮСТК.')</script>";
+            }else{
+                echo "<script>alert('Неизвестная ошибка при отправке сообщения, повторите позже.')</script>";
+            }
+        }else{
+              echo  "<script>alert('Контрольный код введен не верно.')</script>";
+        }
+
+
+    }
 
 
 }

@@ -16,26 +16,31 @@ class UserIdentity extends CUserIdentity
      * @return boolean whether authentication succeeds.
      */
     private $_id;
+
     public function authenticate()
     {
 
         $username=strtolower($this->username);
 
-        $user=User::model()->find('LOWER(login)=:username',array(':username'=>$username));
+        $user=Users::model()->find('LOWER(login)=:username',array(':username'=>$username));
 
         if($user===null)
-            $this->errorCode=self::ERROR_USERNAME_INVALID;
+           $this->errorCode=self::ERROR_USERNAME_INVALID;
 
-        else if(!$user->validatePassword($this->password))
-            $this->errorCode=self::ERROR_PASSWORD_INVALID;
-        else
-        {
-            $this->_id=$user->id;
-            $this->username=$user->login;
-            $this->errorCode=self::ERROR_NONE;
-        }
+      elseif(!$user->validatePassword($this->password))
+         $this->errorCode=self::ERROR_PASSWORD_INVALID;
+      else $this->saveAttr($user);
+
 
         return $this->errorCode==self::ERROR_NONE;
+    }
+
+    public function saveAttr($user){
+        Yii::app()->user->setState("role", $user->role);
+        Yii::app()->user->setState("name", $user->name);
+        $this->_id=$user->id;
+        $this->username=$user->login;
+        $this->errorCode=self::ERROR_NONE;
     }
 
     public function getId()
@@ -43,8 +48,4 @@ class UserIdentity extends CUserIdentity
         return $this->_id;
     }
 
-    public function isFront()
-    {
-        return false;
-    }
 }

@@ -9,9 +9,14 @@
 class ControlerCPanel extends CController
 {
 
-    public $nameControlerForView = "Основные категории";
+    public $nameControlerForView = "";
     public $descriptionActionControlerForView = "";
-
+    public $name;
+    public $edit;
+    public $model;
+    public $save = 'ok';
+    public $return = "//ajaxOK";
+    public $returnArray = array();
     public $layout='//layouts/column1';
     /**
      * @var array context menu items. This property will be assigned to {@link CMenu::items}.
@@ -31,9 +36,29 @@ class ControlerCPanel extends CController
         );
     }
 
-    public  function  filterCheckAccess($filterChain) {
+    public function uploadFile($name,$object){
 
-        if (Yii::app()->user->isGuest) {
+        $info_dir = getcwd().'/uploads/'.$name.'/';
+
+        if(!is_dir($info_dir)) mkdir($info_dir,0770);
+
+        if(!$object->saveAs($info_dir.strtolower($object))) $this->save = 'error';
+    }
+	
+	public function message(){
+
+        if(isset($_GET['save'])) {
+            switch ($_GET['save']){
+                case 'ok': return MYChtml::showMessage('Сохранено успешно'); break;
+                case 'error': return MYChtml::showError('Ошибка сохранения'); break;
+            }
+            unset($_GET['save']);
+        }
+    }
+
+    public  function  filterCheckAccess($filterChain) {
+        header('Content-Type: text/html; charset=windows-1251');
+           if (Yii::app()->user->isGuest) {
             $this->redirect($this->createUrl("/login"));
         }
 
@@ -41,58 +66,25 @@ class ControlerCPanel extends CController
         return true;
     }
 
+    public function MailerTo($item,$model){
+        $__smtp=Yii::app()->params['smtp'];
 
-    //-----------Функция удаления директории----------//
+        Yii::app()->mailer->Host = $__smtp['host'];
+        Yii::app()->mailer->Port = $__smtp['port'];
+        Yii::app()->mailer->IsSMTP();
+        Yii::app()->mailer->SMTPAuth = $__smtp['auth'];
+        Yii::app()->mailer->Username = $__smtp['username'];
+        Yii::app()->mailer->Password = $__smtp['password'];
+        Yii::app()->mailer->SMTPDebug = $__smtp['debug'];
+        Yii::app()->mailer->From = $__smtp['from'];
+        Yii::app()->mailer->FromName = iconv("windows-1251","UTF-8",$__smtp['fromname']);
 
-    public function DeleteDir($dir,$exp=''){
-        if ($objs = glob($dir."/*")) {
-            foreach($objs as $obj) {
-                is_dir($obj) ? $this->DeleteDir($obj,$exp) : unlink($obj);
-            }
-        }
-        @rmdir($dir);
-    }
-
-    //-----------------------------------------------//
-
-
-    public function ResizeOrigin($dir,$name,$width){
-        //$dir = strtolower($dir);
-        $size=GetImageSize ($dir);
-
-        //echo substr($dir,strpos($dir,"."));
-        //echo $dir;
-
-
-        switch (strtolower(substr($dir,strpos($dir,".")))) {
-            case '.jpg': $src = @imagecreatefromjpeg($dir); break;
-            case '.gif': $src = @imagecreatefromgif($dir); break;
-            case '.png': $src = @imagecreatefrompng($dir); break;
-        }
-        $iw=$size[0];
-        $ih=$size[1];
-       // echo "jhghjgj";
-
-        $ratio = $iw/$width;
-        $w_dest = round($iw/$ratio);
-        $h_dest = round($ih/$ratio);
-        $dst=ImageCreateTrueColor ($w_dest, $h_dest);
-        ImageCopyResampled ($dst, $src, 0, 0, 0, 0, $w_dest, $h_dest, $iw, $ih);
-        $url = "";
-
-        switch (strtolower(substr($dir,strpos($dir,".")))) {
-
-            case '.jpg': imagejpeg($dst, $name, 80);
-                break;
-
-            case '.gif': imagegif($dst, $name, 80);
-                break;
-
-            case '.png': imagepng($dst, $name, 0);
-                break;
-
-        }
-        imagedestroy($src);
+        Yii::app()->mailer->AddAddress($item->email); //bablgum@mail.ru
+        Yii::app()->mailer->Subject = iconv("windows-1251","UTF-8",$model->title);
+        Yii::app()->mailer->MsgHTML(iconv("windows-1251","UTF-8",$this->renderPartial('//clearRender', array('model'=>$model,'item'=>$item),true)));
+        Yii::app()->mailer->CharSet = "UTF-8";
+        if(Yii::app()->mailer->send())	return true;
+        else return false;
     }
 
 

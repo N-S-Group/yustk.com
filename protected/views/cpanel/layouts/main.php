@@ -2,9 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
-    <title>Администраторская панель</title>
+    <title>Личный кабинет</title>
     <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/cpanel/main.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/cpanel/colorbox.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/cpanel/fullcalendar.css" rel="stylesheet" type="text/css" />
+
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 
@@ -42,43 +44,28 @@
 
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/custom.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/options.js"></script>
-	<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/swfobject.js"></script>
-<script>
- $(document).ready(function() {
-  $("a.groups_photo").colorbox({rel:'groups_photo',transition:"elastic",speed:550,width:"800px"});
-  $("a.title_photo").colorbox({transition:"elastic",speed:550,width:"800px"});
-  $("#photos_count").click(function(){
-  	if($("#radio3").is(":checked")){
-		$("#photos_int").removeAttr("readonly");
-	}else{
-		$("#photos_int").attr("readonly","readonly");
-	}
-  });
-  
-  $("#select_type").click(function(){
-  	if($("#radio4, #radio5, #radio6").is(":checked")){
-		$("#element_int").removeAttr("readonly");
-	}else{
-		$("#element_int").attr("readonly","readonly");
-	}
-  });
-  
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/datepickerOptions.js"></script>
 
-    });
-</script>
 </head>
 
 <body>
+
 <!-- Left side content -->
 <div id="leftSide">
-    <div class="logo"><a href="http://openart.su" target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo.png" alt="" /></a></div>
+
 
     <div class="sidebarSep mt0"></div>
 <!-- Left side content -->
 
-<? $this->widget('application.widgets.Menu',
-    array(   )
-); ?>
+    <ul class="nav" id="menu">
+
+        <?if(Yii::app()->user->role==4):?>
+            <li class="ui"><a title="" href="<?=$this->createUrl('users/index');?>"><span>Пользователи</span></a></li>
+            <li class="comments"><a title="" href="<?=$this->createUrl('comments/index');?>"><span>Отзывы</span></a></li>
+            <li class="gallery_front"><a title="" href="<?=$this->createUrl('gallery/index');?>"><span>Галерея</span></a></li>
+        <?endif;?>
+
+    </ul>
 
 </div>
 
@@ -89,12 +76,9 @@
     <!-- Top fixed navigation -->
     <div class="topNav">
         <div class="wrapper">
-            <div class="welcome"><a href="#" title=""><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/userPic.png" alt="" /></a><span></span></div>
+            <div class="welcome"><span></span></div>
             <div class="userNav">
                 <ul>
-                    <li><a href="<?=$this->createUrl("settings/",array());?>" title="" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/icons/topnav/profile.png" alt="" /><span>Профиль</span></a></li>
-
-                    <li ><a href="javascript:$.jGrowl('Функция не доступна');" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/icons/topnav/settings.png" alt="" /><span>Настройки</span></a></li>
 
                     <li><a href="<?=$this->createUrl("login/exit",array());?>" title=""><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/icons/topnav/logout.png" alt="" /><span>Выход</span></a></li>
                 </ul>
@@ -105,9 +89,9 @@
 
     <div class="titleArea">
         <div class="wrapper">
-            <div class="pageTitle">
-                <h5><?=$this->nameControlerForView?></h5>
-                <span><?=$this->descriptionActionControlerForView?></span>
+            <div class="pageTitle" style="text-align: center; width: 100%;">
+                <h1 ><?=$this->descriptionActionControlerForView;?></h1>
+                <span></span>
 
             </div>
         </div>   <br><br><br> <br> <br>
@@ -116,12 +100,12 @@
     <!-- Breadcrumbs -->
 
     <div class="wrapper">
+    <?=$this->message();?>
     <?php echo $content; ?>
-
-        </div>
+    </div>
     <!-- Footer line -->
     <div id="footer">
-        <div class="wrapper">Все права защищены. Обращатесь на сайт разработчика <a href="http://openart.su" title="">OpenArtStudio</a></div>
+        <div class="wrapper"></div>
     </div>
 
 </div>

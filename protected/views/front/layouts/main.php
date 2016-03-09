@@ -8,6 +8,7 @@
     <script src="<?=$this->path?>/js/jquery-1.12.0.min.js"></script>
     <script src="<?=$this->path?>/js/jquery.validate.js"></script>
     <script src="<?=$this->path?>/js/localization/messages_ru.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body>

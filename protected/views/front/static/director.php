@@ -28,9 +28,11 @@
 
 
 
-         <p>Введите что изображено на картинке:<br>
-             <?php $this->widget('CCaptcha',array("buttonLabel"=>"<br>Обновить картинку")); /*выводим саму каптчу*/?>
+         <p>Проверка на спам:<br>
 
+             <div class="g-recaptcha" data-sitekey="6LdCWRoTAAAAAJEJ-nyk8VdRa6GQbQHQN-6Jyosb"></div>
+
+             <br><label class="error" style="color: red" for="message"></label>
          </p>
 
         <p>

@@ -23,6 +23,7 @@ return array(
         'application.models.*',
         'application.components.*',
         'application.helpers.*',
+        'ext.giix-components.*', // giix components
 
     ),
 
@@ -31,7 +32,12 @@ return array(
         'gii'=>array(
             'class'=>'system.gii.GiiModule',
             'password'=>'1111',
-
+            'ipFilters'=>array("127.0.0.1","192.168.0.89"),
+            'generatorPaths' => array(
+                'ext.giix-core', // giix generators
+            ),
+            // 'newFileMode'=>0666,
+            // 'newDirMode'=>0777,
         ),
     ),
 
@@ -50,14 +56,14 @@ return array(
             // use 'front/error' action to display errors
             'errorAction'=>'/static/error',
         ),
-        /*'db'=>array(
-            'connectionString' => 'mysql:host=localhost;dbname=karum',
+        'db'=>array(
+            'connectionString' => 'mysql:host=localhost;dbname=yustk.com',
             'emulatePrepare' => true,
             'username' => 'root',
             'password' => '1111',
             'charset' => 'cp1251',
         ),
-*/
+
 
         'log'=>array(
             'class'=>'CLogRouter',
@@ -76,19 +82,19 @@ return array(
     'params'=>array(
         // this is used in contact page
         'adminEmail'=>'webmaster@example.com',
-      /*  'smtp' => array(
-            "host" => "smtp.timeweb.ru", //smtp ??????
+        'smtp' => array(
+            "host" => "smtp.spaceweb.ru", //smtp ??????
             "debug" => 1, //??????????? ?????????? ????????? (0 - ??? ??????)
             "auth" => true, //?????? ??????? ???????????
             "port" => 25, //???? (??-????????? - 25)
-            "username" => "mail@karum.ru", //??? ???????????? ?? ???????
-            "password" => "S55R0101", //??????
-            "addreply" => "mail@karum.ru", //??? ?-mail
+            "username" => "no-reply@yustk.com", //??? ???????????? ?? ???????
+            "password" => "q34fsd243df", //??????
+            "addreply" => "no-reply@yustk.com", //??? ?-mail
             "replyto" => "", //e-mail ??????
-            "fromname" => "?????.??", //???
-            "from" => "mail@karum.ru", //?? ????
+            "fromname" => "Форма обратной связи", //???
+            "from" => "no-reply@yustk.com", //?? ????
             "charset" => "utf-8", //?? ????
-        )*/
+        ),
         'settings'=>array(
             "mailDirector" => "bablgum@mail.ru",
             "mailMain"     => "bablgum@mail.ru"

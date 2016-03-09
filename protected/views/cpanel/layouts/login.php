@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
-    <title>Администраторская панель</title>
+    <title>Страница входа</title>
     <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/cpanel/main.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/cpanel/colorbox.css" rel="stylesheet" type="text/css" />
 
@@ -27,7 +27,6 @@
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/tables/datatable.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/tables/tablesort.min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/tables/resizable.min.js"></script>
-
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/ui/jquery.tipsy.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/ui/jquery.collapsible.min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/ui/jquery.prettyPhoto.js"></script>
@@ -35,32 +34,28 @@
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/ui/jquery.jgrowl.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/ui/jquery.breadcrumbs.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/ui/jquery.sourcerer.js"></script>
-
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/calendar.min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/elfinder.min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/jquery.colorbox.js"></script>
-
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/custom.js"></script>
-
-
 
 </head>
 <body class="nobg loginPage">
 
 <!-- Top fixed navigation -->
-<div class="topNav">
+<!--<div class="topNav">
     <div class="wrapper">
         <div class="userNav">
             <ul>
-                <li><a href="index.php" title=""><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/icons/topnav/mainWebsite.png" alt="" /><span>На сайт</span></a></li>
-                <li><a href="http://openart.su" title=""><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/icons/topnav/profile.png" alt="" /><span>Сайт разработчика</span></a></li>
-                <li><a href="mailto:support@openartstudio.ru" title=""><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/icons/topnav/messages.png" alt="" /><span>Написать разработчику</span></a></li>
+                <li></li>
+                <li><a href="<?=$this->createUrl('../.');?>" title=""><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/icons/topnav/mainWebsite.png" alt="" /><span>На сайт</span></a></li>
+                <li></li>
 
             </ul>
         </div>
         <div class="clear"></div>
     </div>
-</div>
+</div>-->
 
 <?php echo $content; ?>
 
@@ -68,7 +63,7 @@
 <div class="loginWrapper">
 
     <div class="widget">
-        <div class="title"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/icons/dark/files.png" alt="" class="titleIcon" /><h6>Администраторская панель</h6></div>
+        <div class="title"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/icons/dark/files.png" alt="" class="titleIcon" /><h6>Страница входа</h6></div>
         <form action="<?=$this->createUrl("index");?>" id="validate" class="form" method='post'>
             <fieldset>
                 <div class="formRow">
@@ -84,7 +79,7 @@
                 </div>
 
                 <div class="loginControl">
-                   <div class="rememberMe"><? echo CHtml::link('Забыли пароль?',$this->createUrl('recovery/index'));?></div>
+                   <div class="rememberMe"></div>
                     <input type="submit" value="Вход" class="dredB logMeIn" />
                     <div class="clear"></div>
                 </div>
@@ -95,7 +90,7 @@
 
 <!-- Footer line -->
 <div id="footer">
-    <div class="wrapper">Все права защищены. Обращатесь на сайт разработчика <a href="http://openart.su" title="">OpenArtStudio</a></div>
+    <div class="wrapper"></div>
 </div>
 
 <?echo $msg?>

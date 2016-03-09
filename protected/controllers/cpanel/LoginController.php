@@ -10,32 +10,25 @@ class LoginController extends CController
 {
 
     public $layout='//layouts/login';
-
-
-    public function actions()
-    {
-
-    }
-
+    public $url = "/users";
 
        public function actionIndex()
     {
+        header('Content-Type: text/html; charset=windows-1251');
         $model=new LoginForm();
-
 
         if(isset($_POST['loginForm']))
         {
-
-            // получаем данные от пользователя
             $model->attributes=$_POST['loginForm'];
 
+            if($model->Login()){
 
-            // проверяем полученные данные и, если результат проверки положительный,
-            // перенаправляем пользователя на предыдущую страницу
+                switch (Yii::app()->user->role){
+                    case 1: $this->url = '/users'; break;
+                    case 7: $this->url = '/users'; break;
+                }
 
-            if($model->validate() &&  $model->Login()) {
-                $this->redirect($this->createUrl("/site/index"));
-
+                $this->redirect($this->createUrl($this->url));
             }
 
         }
@@ -48,7 +41,7 @@ class LoginController extends CController
         // renders the view file 'protected/views/front/index.php'
         // using the default layout 'protected/views/layouts/main.php'
         Yii::app()->user->logout();
-        $this->redirect($this->createUrl("/login"));
+        $this->redirect($this->createUrl("."));
     }
 
 
