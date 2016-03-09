@@ -1,0 +1,56 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: PC
+ * Date: 27.11.12
+ * Time: 2:11
+ * To change this template use File | Settings | File Templates.
+ */
+class LoginController extends CController
+{
+
+    public $layout='//layouts/login';
+
+
+    public function actions()
+    {
+
+    }
+
+
+       public function actionIndex()
+    {
+        $model=new LoginForm();
+
+
+        if(isset($_POST['loginForm']))
+        {
+
+            // получаем данные от пользователя
+            $model->attributes=$_POST['loginForm'];
+
+
+            // проверяем полученные данные и, если результат проверки положительный,
+            // перенаправляем пользователя на предыдущую страницу
+
+            if($model->validate() &&  $model->Login()) {
+                $this->redirect($this->createUrl("/site/index"));
+
+            }
+
+        }
+        $this->render('index', array("model"=>$model));
+    }
+
+
+    public function actionExit()
+    {
+        // renders the view file 'protected/views/front/index.php'
+        // using the default layout 'protected/views/layouts/main.php'
+        Yii::app()->user->logout();
+        $this->redirect($this->createUrl("/login"));
+    }
+
+
+
+}

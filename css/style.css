@@ -1,0 +1,359 @@
+/* Eric Meyer's CSS Reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+    background-color: #fbfbfb;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+/* End of Eric Meyer's CSS Reset */
+
+html {
+    height: 100%;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+    display: block;
+}
+
+
+p {
+    padding: 10px 20px;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+html,
+body {
+    height: 100% !important;
+
+}
+
+
+.wrapper {
+    width: 100%;
+    max-width: 1327px;
+    min-width: 1000px;
+
+
+    /*height: 100% !important;*/
+    margin: 0 auto;
+    font: 14px/20px Arial, sans-serif;
+    background: url("../images/background.png");
+}
+.content {
+
+    box-sizing: border-box;
+    min-height: 100%  !important;
+    padding-bottom: 140px  !important;
+
+}
+h1 {
+    padding: 40px 20px 30px;
+    font: 26px/1.3 Arial, sans-serif;
+    text-align: center;
+}
+
+h3 {
+    padding: 10px 5px 0px;
+    font: 22px/1.3 Arial, sans-serif;
+
+}
+
+h2 {
+font-family: MyriadProBCI;
+    font-size: 15px;
+}
+
+p {
+    padding: 10px 20px;
+}
+a {
+    color: #76c423;
+}
+.footer {
+
+    height: 80px;
+    margin-top: -80px;
+    background: #323a45;
+    border-top: 2px solid #e2a500;
+    position: relative;
+}
+
+
+.header {
+    height: 143px;
+    position: relative;
+}
+
+.top_menu{
+
+    border-top: 2px solid #d6d6d6;
+    height: 65px;
+    padding-top: 20px;
+}
+
+
+.top_menu ul li {
+    display: inline-block;
+
+    padding: 10px 25px;
+    margin: 0 2%;
+    font-size: 18px;
+    font-family: MyriadProBCI;
+    color: #676767;
+    text-transform: uppercase;
+
+
+}
+
+.courusel {
+
+
+}
+
+.courusel img {
+    width: 100%;
+}
+
+.main {
+
+    max-width: 1130px;
+    width: 100%;
+    margin: 0 auto ;
+    font-family: Tahoma;
+    font-size: 13px;
+}
+
+.services  ul li{
+    background: #ffffff;
+   display: inline-block;
+   width: 19%;
+}
+
+.img_service {
+    width: 100%;
+
+}
+
+.services  td{
+   width: 20%;
+
+   }
+
+
+
+.services  td li:last-child {
+    padding: 0px 0px 0px 15px;
+}
+
+.img_service img{
+    max-width: 100%;
+
+}
+
+.more_service {
+    margin: 15px 10px;
+    height: 220px;
+    line-height: 140%;
+}
+
+.more_service b {
+
+    color: #4aa737;
+    font-weight: normal;
+    font-size: 15px !important;
+}
+
+.width100 {
+
+    margin-right: 20px;
+    background-color: #ffffff;
+
+}
+
+.director_mail {
+    padding-top: 20px;
+    padding-right: 50px;
+    float: left;
+    width: 28%;
+    line-height: 120%;
+    border-right: 1px solid #727272;
+}
+
+.director_mail p{
+    text-align: justify;
+}
+
+.partner {
+    width: 60%;
+    float: right;
+}
+
+.logo {
+    padding-top: 30px;
+}
+
+.login {
+    text-align: right;
+    position: absolute;
+    right: 0px;
+    top: 25px;
+    font-family: tahoma;
+    font-size: 11px;
+    color: black;
+    line-height: 240%;
+}
+
+.login a { color: #4aa737; font-size: 13px}
+.login a:hover { text-decoration: underline}
+
+.login span {color: #4aa737; font-size: 12px}
+
+.login input[type='text']
+{
+
+    width: 130px;
+    font-size: 13px;
+    padding: 4px 0 3px 10px;
+    border: 1px solid #cecece;
+    background: #F6F6f6;
+    border-radius: 3px;
+
+}
+
+.service_1 {
+    background:transparent url("../images/services.png") 0 0px no-repeat;
+}
+
+.service_2 {
+    background:transparent url("../images/services.png") 0 -36px no-repeat;
+}
+
+.service_3 {
+    background:transparent url("../images/services.png") 0 -71px no-repeat;
+}
+
+.service_4 {
+    background:transparent url("../images/services.png") 0 -109px no-repeat;
+}
+
+.service_5 {
+    background:transparent url("../images/services.png") 0 -143px no-repeat;
+}
+.services_name {height: 35px; margin-bottom: 18px;  }
+
+a.green1 {color: #4aa737}
+/* color: #87ce3c */
+.active {background-color: #4aa737; }
+
+.tech_table {
+    border: 0;
+    width: 100%;
+}
+
+.tech_table td{
+    vertical-align: top;
+    padding: 20px;
+    text-align: justify;
+}
+
+.tech_table td img {
+    border: 1px solid #b2b2b2;
+}
+
+
+.footer_cont span, .footer_menu span {font-family: MyriadProBCI; font-size: 17px; color: #ffffff}
+.footer_cont {font-family: tahoma; font-size: 12px; color: #ffffff; position: absolute; top: 10px; left: 0px}
+
+.footer_menu { position: absolute; top: 10px; left: 350px}
+.footer_logo {position: absolute; top: 10px; left: 700px; font-family: tahoma}
+
+
+.price { width:90% }
+.price tr:hover { background-color: rgba(0, 123, 214, 0.10)
+}
+
+.price td {padding: 6px; vertical-align: top}
+.price thead td {font-weight: bold;
+    border-bottom: 2px solid #235683;}
+
+.price tbody td {
+    border-bottom: 1px solid #e4e4e4;
+    font-size: 12px;
+    text-align: left;
+    vertical-align: bottom;
+    padding: 11px 0px 5px 7px;
+    line-height: 1.5em;
+}
+
+.form p {
+    padding: 3px;
+}
+
+.form input {
+    width: 350px;
+    font: 14px;
+}
+
+.form textarea {width: 600px;
+    border: 1px solid #cecece;
+    background: #F6F6f6;
+    border-radius: 3px;
+height: 130px}
+
+.form input[type="text"] {
+
+
+    padding: 4px 0 3px 10px;
+    border: 1px solid #cecece;
+    background: #F6F6f6;
+    border-radius: 3px;
+}
+
+.blues {
+   color: #235683;
+}
+
+.reds {
+    color: red;
+}

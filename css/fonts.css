@@ -1,0 +1,11 @@
+@font-face {
+    font-family: MyriadPro; /* Гарнитура шрифта */
+    src: url(fonts/MyriadPro-Regular.otf); /* Для IE5-8 */
+    src: local(MyriadPro), url(fonts/MyriadPro-Regular.otf); /* Для остальных браузеров */
+}
+
+@font-face {
+    font-family: MyriadProBCI; /* Гарнитура шрифта */
+    src: url(fonts/MyriadPro-BoldCondIt.otf); /* Для IE5-8 */
+    src: local(MyriadProBCI), url(fonts/MyriadPro-BoldCondIt.otf); /* Для остальных браузеров */
+}
