@@ -14,5 +14,9 @@
          "tableName" =>   "Пользователи"
     )
 ); ?>
-
-<?=$this->renderPartial("_form",array('role'=>$role));?>
+    <style>
+        .admin{
+            display: none;
+        }
+    </style>
+<?=$this->renderPartial("_form");?>

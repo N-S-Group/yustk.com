@@ -21,4 +21,4 @@
     <?}?>
 </style>
 
-<?=$this->renderPartial("_form",array('role'=>$role));?>
+<?=$this->renderPartial("_form");?>

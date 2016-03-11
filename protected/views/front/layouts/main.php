@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,6 +63,7 @@
 
 
 <script src="<?=$this->path?>/js/jquery.remodal.js"></script>
+
 
 
 

@@ -1,7 +1,7 @@
 <div class="bc">
     <ul id="breadcrumbs" class="breadcrumbs">
         <li class="current">
-            <a href="<?=$this->createUrl(".")?>"  >Назад к списку</a>
+            <a href="<?=$this->createUrl(".",array("renid"=>$this->model->pid))?>"  >Назад к списку</a>
 
         </li>
 
@@ -21,4 +21,4 @@
     <?}?>
 </style>
 
-<?=$this->renderPartial("_form",array('role'=>$role));?>
+<?=$this->renderPartial("_form");?>

@@ -1,7 +1,8 @@
 <?$action = ($this->edit)? 'EditRecord'  : 'add' ;?>
+
 <div class="widget">
     <a name='formadd'></a>
-    <form action="<?=$this->createUrl($action,array("edit"=>$this->edit));?>" class="form" method='post' id='addForm'>
+    <form action="<?=$this->createUrl($action,array("edit"=>$this->edit,"cl"=>$_GET['cl']));?>" class="form" method='post' id='addForm'>
         <fieldset>
             <div class="title"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/icons/dark/record.png" alt="" class="titleIcon" /><h6><?=$this->name;?></h6></div>
 
@@ -21,10 +22,18 @@
                 <div class="clear"></div>
             </div>
 
-            <div class="formRow">
+            <div class="formRow admin">
                 <label>Телефон:</label>
                 <div class="formRight">
-                    <input type="text" value="<?=$this->model->phone;?>" name='phone' id="phone" style="width:260px;"/><span class="formNote"></span>
+                    <input type="text" value="<?=(isset($this->model->phone))?$this->model->phone:'';?>" name='phone' id="phone" style="width:260px;"/><span class="formNote"></span>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="formRow user">
+                <label>ИНН:</label>
+                <div class="formRight">
+                    <input type="text" value="<?=(isset($this->model->inn))?$this->model->inn:'';?>" maxlength="12" name='inn' style="width:260px;"/><span class="formNote"></span>
                 </div>
                 <div class="clear"></div>
             </div>
@@ -45,7 +54,6 @@
                 <div class="clear"></div>
             </div>
 
-
             <div class="formRow">
                 <label>Повторите пароль:</label>
                 <div class="formRight">
@@ -54,18 +62,17 @@
                 <div class="clear"></div>
             </div>
 
-
             <div class="formRow">
                 <label>Тип пользователя:</label>
                 <div class="formRight">
-                    <select name="role">
-                    <?foreach($role as $item):?>
-                      <option value="<?=$item->id;?>" <?if($this->model->role==$item->id) echo 'selected';?>><?=$item->name?></option>
-                    <?endforeach;?>
+                    <select name="role" id="role">
+                      <option value="1" <?if($_GET['cl']==1) echo 'selected';?>>Пользователь сайта</option>
+                      <option value="4" <?if($_GET['cl']==2) echo 'selected';?>>Администратор</option>
                     </select>
                 </div>
                 <div class="clear"></div>
             </div>
+
 
             <div class="formRow">
                 <label></label>
@@ -85,6 +92,12 @@
 <script>
 
     $(document).ready(function(){
+
+        $("#role").change(function(){
+           if($(this).val() == 1) { $(".admin").hide(); $(".user").show(); }
+           else  { $(".admin").show(); $(".user").hide(); }
+        });
+
     $("#password").val('');
     $('#phone').mask('+7 (999) 99-99-999');
     var validator =  $("#addForm").validate({
@@ -101,7 +114,8 @@
             },
             'password_repeat': {
                 equalTo: "#password"
-            }
+            },
+            'inn': {number:true}
         }
     });
     });

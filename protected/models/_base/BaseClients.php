@@ -14,6 +14,9 @@
  * @property string $password
  * @property string $email
  * @property string $generate
+ * @property integer $inn
+ * @property string $name
+ * @property integer $delete
  *
  */
 abstract class BaseClients extends GxActiveRecord {
@@ -36,13 +39,14 @@ abstract class BaseClients extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('login, password, email', 'required'),
+			array('login, password, email, name', 'required'),
+			array('inn, delete', 'numerical', 'integerOnly'=>true),
 			array('login', 'length', 'max'=>25),
 			array('password', 'length', 'max'=>256),
 			array('email', 'length', 'max'=>150),
-			array('generate', 'length', 'max'=>255),
-			array('generate', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, login, password, email, generate', 'safe', 'on'=>'search'),
+			array('generate, name', 'length', 'max'=>255),
+			array('generate, inn, delete', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, login, password, email, generate, inn, name, delete', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,6 +67,9 @@ abstract class BaseClients extends GxActiveRecord {
 			'password' => Yii::t('app', 'Password'),
 			'email' => Yii::t('app', 'Email'),
 			'generate' => Yii::t('app', 'Generate'),
+			'inn' => Yii::t('app', 'Inn'),
+			'name' => Yii::t('app', 'Name'),
+			'delete' => Yii::t('app', 'Delete'),
 		);
 	}
 
@@ -74,6 +81,9 @@ abstract class BaseClients extends GxActiveRecord {
 		$criteria->compare('password', $this->password, true);
 		$criteria->compare('email', $this->email, true);
 		$criteria->compare('generate', $this->generate, true);
+		$criteria->compare('inn', $this->inn);
+		$criteria->compare('name', $this->name, true);
+		$criteria->compare('delete', $this->delete);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

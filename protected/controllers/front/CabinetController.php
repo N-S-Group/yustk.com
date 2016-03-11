@@ -12,7 +12,7 @@ class CabinetController extends ControlerCPanel
     public $footer;
     public $priceString = "";
     public $description = "ﬁ—“ ";
-    public $path = "http://test.yustk.com";
+    public $path = "http://localhost/yustk.com";
     public $courSection = "";
     public $courCount = 4;
 

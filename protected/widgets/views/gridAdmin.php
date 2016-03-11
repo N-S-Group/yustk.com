@@ -52,6 +52,11 @@
         return false;
     });
 
+    $(".forRenewalConfirm").live("click", function(e) {
+        var id = this.id.substr(6);
+        location.href="<?=$base_route.$routeRenewal?>?renid="+id+"#formadd";
+    });
+
     $("#titleCheck").live("click", function() {
         var checkedStatus = this.checked;
         $("#tableMainCheck tbody tr td:first-child input:checkbox").each(function() {
@@ -69,7 +74,8 @@
 
     $(".forEditConfirm").live("click", function(e) {
         var id = this.id.substr(7);
-        location.href="<?=$base_route.$routeEditForm?>?editid="+id+"#formadd";
+        var cl =(this.id.substr(0,7) == 'cliEdit')?1:2;
+        location.href="<?=$base_route.$routeEditForm?>?editid="+id+"&cl="+cl+"#formadd";
     });
 
 	

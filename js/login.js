@@ -16,11 +16,11 @@ $(document).ready(function(){
     }
 
     $("#submit").click(function(){
-        if(!$.trim($("#login").val())){
+        if(!$.trim($("#login").val()).length){
             errorAuth('Для входа введите имя пользователя');
             return false;
         }
-        if(!$.trim($("#password").val())){
+        if(!$.trim($("#password").val()).length){
             errorAuth('Для входа введите пароль');
             return false;
         }
@@ -108,6 +108,7 @@ $(document).ready(function(){
                     switch (parseInt(data)){
                         case 10: $("#showerrorsEmail").text('Пользователь с таким email не зарегистрирован'); break;
                         case 11: $("#showerrorsEmail").css('color','green').text('Письмо для восстановление пароля выслана вам на email'); break;
+                        case 12: $("#showerrorsEmail").css('color','red').text('При отправке письма что-то пошло не так. Попробуйте позже.'); break;
                     }
                   });
 

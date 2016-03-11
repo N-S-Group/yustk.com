@@ -1,3 +1,16 @@
+<?if(Yii::app()->user->hasFlash('success') && Yii::app()->user->getFlash('success') == 'ok'){?>
+<div class="remodal" data-remodal-id="modal_success">
+    <h1>Вы успешно восстановили пароль</h1>
+</div>
+    <script>
+        $(document).ready(function(){
+            var inst = $.remodal.lookup[$('[data-remodal-id=modal_success]').data('remodal')];
+            inst.open();
+        });
+    </script>
+<?}?>
+
+
 <div class="content main" style="border-top: 2px solid #d6d6d6">
 
     <h3>Документы</h3><br>

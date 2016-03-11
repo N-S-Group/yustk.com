@@ -25,6 +25,7 @@ class Users extends BaseUsers
 
     }
 
+
     public function hashPassword($password){
 
         return  md5($password);
