@@ -142,6 +142,26 @@ class MYDate
 		}else{
 			return(in_array($new_date[2],$no_zero))?$no_zero[$new_date[2]]." ".$array[$new_date[1]]." ".$new_date[0]:$new_date[2]." ".$array[$new_date[1]]." ".$new_date[0];
 		}
-			
-    }
-}
+         }
+
+        public static function shortMonth($data){
+
+        $array=array('01'=>"ßÍÂ",
+        '02'=>"ÔÅÂ",
+        '03'=>"ÌÀĞ",
+        '04'=>"ÀÏĞ",
+        '05'=>"ÌÀÉ",
+        '06'=>"ÈŞÍ",
+        '07'=>"ÈŞË",
+        '08'=>"ÀÂÃ",
+        '09'=>"ÑÅÍ",
+        '10'=>"ÎÊÒ",
+        '11'=>"ÍÎß",
+        '12'=>"ÄÅÊ");
+        return $array[$data];
+        }
+
+
+
+        }
+

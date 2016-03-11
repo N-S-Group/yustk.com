@@ -12,8 +12,20 @@ class CommentsController extends ControlerCPanel
 
     public function actionEdit()
     {
+
+        $model = Comments::getModelByPk($_GET['editid']);
+        if ($_GET["confirm"] == 1) {
+            Comments::confirmModelByPk($_GET['editid']);
+        }
+
+        if ($_GET["save"] == 1) {
+            $model->attributes = $_POST;
+            $model->save();
+
+        }
+
         header('Content-Type: text/html; charset=windows-1251');
-        $this->renderPartial("_form",array('model'=>Comments::getModelByPk($_GET['id'])));
+        $this->render("_form",array('model'=> $model));
     }
 
     public function actionEditRecord(){
@@ -23,12 +35,7 @@ class CommentsController extends ControlerCPanel
         }
     }
 
-    public function actionconfirmRecord(){
-        if(Yii::app()->request->isAjaxRequest){
-            $status = Comments::confirmModelByPk($_POST['id'])?"/ajaxOK":"/ajaxERROR";
-            $this->renderPartial($status);
-        }
-    }
+
 
     public function actionAjaxGet(){
         if(Yii::app()->request->isAjaxRequest){

@@ -22,6 +22,12 @@ class StaticController extends CController
         );
     }
 
+    protected  function createData($data){
+
+        $time = strtotime($data);
+        return "<span>".date("d",$time)."</span><br>".MYDate::shortMonth(date("m",$time));
+    }
+
     public function filterPreLoadTree($filterChain)
     {
 
@@ -85,7 +91,6 @@ class StaticController extends CController
                 $this->courSection = "guest-book";
                 $this->title = "Обращение к директору";
                 $this->description = "Обращение к директору";
-
                 if (Yii::app()->request->isPostRequest) {
                     $this->sendMail();
                 }
@@ -95,10 +100,18 @@ class StaticController extends CController
                 break;
 
                 case "guest-book":
+
+                    if (Yii::app()->request->isPostRequest) {
+                        $this->sendCommentToBD();
+                    }
+
+                    $comments = Comments::model()->findAll(array("condition"=>"confirm = 1","order"=>"id desc", "limit"=>20));
+                    if (!$comments) $comments = Array();
+
                 $this->courSection = "guest-book";
                 $this->title = "Отзывы";
                 $this->description = "Отзывы";
-                $this->section = "guest-book"; $this->isMain=true; $this->render("guestbook");
+                $this->section = "guest-book"; $this->isMain=true; $this->render("guestbook", array("comments"=>$comments));
 
                 break;
 
@@ -159,18 +172,30 @@ class StaticController extends CController
         }
 
 
+    private function sendCommentToBD() {
+
+        $comment = new Comments();
+        $comment->attributes = $_POST["comment"];
+        $comment->date_create = new CDbExpression("NOW()");
+        if ($comment->save()) {
+
+            echo "<script>alert('Ваш отзыв будет опубликован после проверки администрацией сайта.')</script>";
+
+        } else {
+
+            echo "<script>alert('Произошла ошибка, отзыв не будет опубликован.')</script>";
+        }
+
+
+    }
+
+
     public function sendMail(){
       if ($this->checkReCaptcha()) {
-
-
-
             $__smtp=Yii::app()->params['smtp'];
-
             Yii::app()->mailer->Host = $__smtp['host'];
             Yii::app()->mailer->Port = $__smtp['port'];
             Yii::app()->mailer->IsSMTP();
-
-
             Yii::app()->mailer->Subject = "Обращение к директору с сайта yustk.com";
             Yii::app()->mailer->SMTPAuth = $__smtp['auth'];
             Yii::app()->mailer->Username = $__smtp['username'];
@@ -179,7 +204,6 @@ class StaticController extends CController
             Yii::app()->mailer->From = $__smtp['from'];
             Yii::app()->mailer->FromName = $__smtp['fromname'];
             Yii::app()->mailer->AddAddress("bablgum@mail.ru"); //bablgum@mail.ru
-
             Yii::app()->mailer->MsgHTML($this->renderPartial(Yii::app()->mailer->pathViews, array('post'=>$_POST["mail"]),true));
             Yii::app()->mailer->CharSet = "windows-1251";
             if(Yii::app()->mailer->send()){

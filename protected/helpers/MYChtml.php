@@ -48,6 +48,7 @@ class MYChtml extends  CHtml
 
     }
 
+
     public static  function showMessage($content) {
 
         if (strlen($content)>0) return '<div class="nNote nInformation hideit">
@@ -56,88 +57,44 @@ class MYChtml extends  CHtml
 
     }
 
-
     public static  function showError($content) {
 
         if (strlen($content)>0) return '<div class="nNote nFailure hideit">
-            <p><strong>ИНФОРМАЦИЯ: </strong>'.$content.'</p>
+            <p><strong>ОШИБКА: </strong>'.$content.'</p>
         </div>';
 
     }
 
-	public static function showDescription($val){
-		
-		$numOfWords = 4;
-	
-        $value = CHtml::encode($val);  
-  
-        $lenBefore = strlen($val);  
-  
-        if($numOfWords){  
-            if(preg_match("/\s*(\S+\s*){0,$numOfWords}/", $val, $match)){  
-                $val = trim($match[0]);  
-            }  
-            if(strlen($val) != $lenBefore){  
-                $val .= ' ...';
-            }
-		}
-		return $val;
-	}
-	
-	public static function showHot($val){
-		switch ($val){
-			case 0: return "Не важно";
-			break;
-			case 1: return "Важно";
-			break;
-			case 2: return "Очень важно";
-			break;
-		}
-	}
-	
-	public static function showValue($val){
-		$value = Fields::model()->findByPk($val);
-		return $value->value;
-	}
-	
-	public static function getPhotos($id,$pid,$type,$small=false){ //Функция выбора файлов, заглавной и других фотографий
-		$uploaddir = Yii::getPathOfAlias("webroot");
-		$dir="/uploads/objects/".$pid."/".$id."/".$type;
-		if(is_dir($uploaddir.$dir)){
-			@$title = scandir($uploaddir.$dir);
-		$return=($type=='title')?$title[2]:$title;
-		if($type=='title' && strlen($return)==0) {
-			return Yii::app()->request->baseUrl."/images/noimage.jpg"; break;
-		}
-
-            if($type=='title' && strlen($return)>0 && $small) {
-             return  Yii::app()->request->baseUrl.$dir."/".str_replace("title","small",$return);
-            }
-
-		$result=array();
-			if(is_array($return)){
-				foreach ($return as $file){
-					$result[]=Yii::app()->request->baseUrl.$dir."/".$file;
-				}
-				unset($result[0],$result[1]);
-				if($type=='photos')unset($result[count($result)+1]);
-				return $result;
-			}else{
-				return Yii::app()->request->baseUrl.$dir."/".$return;
-			}
-		}elseif($type=='title' && !is_dir($uploaddir.$dir) ){
-			return Yii::app()->request->baseUrl."/images/noimage.jpg"; break;
-		}
-	}
-	
-	public static function getNameFile($name){
-		$name_array=explode("/",$name);
-		return $name_array[count($name_array)-1];
-	}
-
-    public  static  function  numbeFormat($obj) {
-
-        return number_format($obj, 0, ',', ' ');
+    public static function maxsite_str_word($text, $counttext = 10, $sep = ' ') {
+        $words = split($sep, $text);
+        if ( count($words) > $counttext )
+            $text = join($sep, array_slice($words, 0, $counttext));
+        return $text;
     }
+
+    public static function filterJSON ($val) {
+        return  trim(str_replace(array("\""),"'",$val));
+    }
+
+    public static function toUTF8($arg) {
+        return iconv("windows-1251","UTF-8",$arg);
+    }
+
+    public static function toWindows1251($arg) {
+        return iconv("UTF-8","windows-1251",$arg);
+    }
+
+    public static function filter ($val) {
+        return  trim(str_replace(array("\t","\\t","\\n","\\r","\n","\r","\\", "/", ";", ":", "'", "\"","(",")"),"",$val));
+    }
+
+    public static function getImage($folder,$name){
+        $a = @scandir( Yii::getPathOfAlias('webroot')."/uploads/".$folder );
+        foreach($a as $item){
+            if($name == substr($item,0,strpos($item,"."))) return $folder."/".$item;
+        }
+    }
+
+
 
 }
