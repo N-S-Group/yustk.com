@@ -10,11 +10,15 @@
  * and there are no model relations.
  *
  * @property integer $id
- * @property string $text
+ * @property string $message
  * @property integer $user_create
  * @property integer $confirm
  * @property integer $delete
  * @property string $date_create
+ * @property string $fio
+ * @property string $email
+ * @property string $tel
+ * @property string $answer
  *
  */
 abstract class BaseComments extends GxActiveRecord {
@@ -32,15 +36,15 @@ abstract class BaseComments extends GxActiveRecord {
 	}
 
 	public static function representingColumn() {
-		return 'text';
+		return 'message';
 	}
 
 	public function rules() {
 		return array(
 			array('user_create, confirm, delete', 'numerical', 'integerOnly'=>true),
-			array('text, date_create', 'safe'),
-			array('text, user_create, confirm, delete, date_create', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, text, user_create, confirm, delete, date_create', 'safe', 'on'=>'search'),
+			array('message, date_create, fio, email, tel, answer', 'safe'),
+			array('message, user_create, confirm, delete, date_create, fio, email, tel, answer', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, message, user_create, confirm, delete, date_create, fio, email, tel, answer', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,11 +61,15 @@ abstract class BaseComments extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'id' => Yii::t('app', 'ID'),
-			'text' => Yii::t('app', 'Text'),
+			'message' => Yii::t('app', 'Message'),
 			'user_create' => Yii::t('app', 'User Create'),
 			'confirm' => Yii::t('app', 'Confirm'),
 			'delete' => Yii::t('app', 'Delete'),
 			'date_create' => Yii::t('app', 'Date Create'),
+			'fio' => Yii::t('app', 'Fio'),
+			'email' => Yii::t('app', 'Email'),
+			'tel' => Yii::t('app', 'Tel'),
+			'answer' => Yii::t('app', 'Answer'),
 		);
 	}
 
@@ -69,11 +77,15 @@ abstract class BaseComments extends GxActiveRecord {
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id);
-		$criteria->compare('text', $this->text, true);
+		$criteria->compare('message', $this->message, true);
 		$criteria->compare('user_create', $this->user_create);
 		$criteria->compare('confirm', $this->confirm);
 		$criteria->compare('delete', $this->delete);
 		$criteria->compare('date_create', $this->date_create, true);
+		$criteria->compare('fio', $this->fio, true);
+		$criteria->compare('email', $this->email, true);
+		$criteria->compare('tel', $this->tel, true);
+		$criteria->compare('answer', $this->answer, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

@@ -183,3 +183,5 @@ tr.even.gradeU td.sorting_3 { background-color: #e2e2e2; }
 .ex_highlight #example tbody tr.odd:hover, #example tbody tr.odd td.highlighted { background-color: #E6FF99; }
 table.display tr.even.gradeA:hover {background-color: #E6F4FB;}
 table.display tr.odd.gradeA:hover {background-color: #E6F4FB;}
+
+.noCenterAlign {text-align: left !important;}

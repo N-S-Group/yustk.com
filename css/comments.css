@@ -1,0 +1,52 @@
+.comment{
+  position: relative;
+  margin-top: 20px;
+}
+
+.comment .time_comment{
+    position: absolute;
+    left: 0;
+    top: 0px;
+    font-family: georgia;
+    color: #7bc928;
+    line-height: 160%;
+    font-weight: bold;
+    text-align: center;
+}
+
+.comment .time_comment span{ font-size: 30px}
+
+.comment .text_comment{
+
+        margin-left: 60px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #3f3f3f;
+}
+
+.comment .who_comment{
+    margin-left: 60px;
+    font-size: 12px;
+    color: #3c6918;
+
+}
+
+
+.comment .answer_comment{
+    margin: 10px 10px 10px 120px;
+    border-radius: 4px;
+    border: 1px solid #ace5ff;
+    padding: 10px;
+    font-style: italic;
+}
+
+
+.comment .answer_comment_text{
+
+
+}
+
+.comment .answer_comment_who{
+
+
+}
