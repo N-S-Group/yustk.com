@@ -22,7 +22,6 @@ class LoginController extends CController
             $model->attributes=$_POST['loginForm'];
 
             if($model->Login()){
-
                 switch (Yii::app()->user->role){
                     case 1: $this->url = '/users'; break;
                     case 7: $this->url = '/users'; break;
@@ -30,7 +29,6 @@ class LoginController extends CController
 
                 $this->redirect($this->createUrl($this->url));
             }
-
         }
         $this->render('index', array("model"=>$model));
     }

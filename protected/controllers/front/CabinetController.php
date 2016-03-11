@@ -1,6 +1,6 @@
 <?php
 
-class CabinetController extends CController
+class CabinetController extends ControlerCPanel
 {
 
 
@@ -15,12 +15,13 @@ class CabinetController extends CController
     public $path = "http://test.yustk.com";
     public $courSection = "";
     public $courCount = 4;
-    public function filters()
+
+  /*  public function filters()
     {
         return array(
             'preLoadTree'
         );
-    }
+    }*/
 
     public function filterPreLoadTree($filterChain)
     {

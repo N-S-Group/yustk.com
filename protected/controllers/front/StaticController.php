@@ -162,9 +162,15 @@ class StaticController extends CController
     public function sendMail(){
       if ($this->checkReCaptcha()) {
 
+              MYMail::MailerTo('bablgum@mail.ru',"Обращение к директору с сайта yustk.com");
+              Yii::app()->mailer->MsgHTML($this->renderPartial(Yii::app()->mailer->pathViews, array('post'=>$_POST["mail"]),true));
+              if(Yii::app()->mailer->send()){
+                  echo "<script>alert('Ваше сообщение отправлено директору ООО ЮСТК.')</script>";
+              }else{
+                  echo "<script>alert('Неизвестная ошибка при отправке сообщения, повторите позже.')</script>";
+              }
 
-
-            $__smtp=Yii::app()->params['smtp'];
+            /*$__smtp=Yii::app()->params['smtp'];
 
             Yii::app()->mailer->Host = $__smtp['host'];
             Yii::app()->mailer->Port = $__smtp['port'];
@@ -186,7 +192,7 @@ class StaticController extends CController
                echo "<script>alert('Ваше сообщение отправлено директору ООО ЮСТК.')</script>";
             }else{
                 echo "<script>alert('Неизвестная ошибка при отправке сообщения, повторите позже.')</script>";
-            }
+            }*/
         }else{
               echo  "<script>alert('Контрольный код введен не верно.')</script>";
         }

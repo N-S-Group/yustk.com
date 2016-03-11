@@ -32,7 +32,7 @@ class loginForm extends CFormModel
         }
     }
 
-    public function Login() {
+    public function Login(){
 
         $identity=new UserIdentity($this->login, $this->password);
         $identity->authenticate();

@@ -5,10 +5,13 @@
     <title>Юстк </title>
     <meta charset="windows-1251" />
     <link href="<?=$this->path?>/css/response.css" rel="stylesheet">
+    <link href="<?=$this->path?>/css/jquery.remodal.css" rel="stylesheet">
+
     <script src="<?=$this->path?>/js/jquery-1.12.0.min.js"></script>
     <script src="<?=$this->path?>/js/jquery.validate.js"></script>
     <script src="<?=$this->path?>/js/localization/messages_ru.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
+
 </head>
 
 <body>
@@ -60,6 +63,7 @@
 </div><!-- .wrapper -->
 
 
+<script src="<?=$this->path?>/js/jquery.remodal.js"></script>
 
 
 

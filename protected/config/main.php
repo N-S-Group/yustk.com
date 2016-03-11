@@ -32,7 +32,7 @@ return array(
         'gii'=>array(
             'class'=>'system.gii.GiiModule',
             'password'=>'1111',
-            'ipFilters'=>array("127.0.0.1","192.168.0.89"),
+           // 'ipFilters'=>array("127.0.0.1","192.168.0.89"),
             'generatorPaths' => array(
                 'ext.giix-core', // giix generators
             ),
@@ -48,16 +48,12 @@ return array(
     ),
 
     'components'=>array(
-
-
-
-
         'errorHandler'=>array(
             // use 'front/error' action to display errors
             'errorAction'=>'/static/error',
         ),
         'db'=>array(
-            'connectionString' => 'mysql:host=localhost;dbname=yustk.com',
+            'connectionString' => 'mysql:host=192.168.0.89;dbname=yustk.com',
             'emulatePrepare' => true,
             'username' => 'root',
             'password' => '1111',

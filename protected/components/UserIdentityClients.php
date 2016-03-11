@@ -1,11 +1,10 @@
 <?php
-
 /**
  * UserIdentity represents the data needed to identity a user.
  * It contains the authentication method that checks if the provided
  * data can identity the user.
  */
-class UserIdentityFront extends CUserIdentity
+class UserIdentityClients extends CUserIdentity
 {
     /**
      * Authenticates a user.
@@ -15,33 +14,26 @@ class UserIdentityFront extends CUserIdentity
      * against some persistent user identity storage (e.g. database).
      * @return boolean whether authentication succeeds.
      */
+
     private $_id;
-    private $_state;
+
+
     public function authenticate()
     {
+        $username=trim(strtolower($this->username));
+        $password=trim(strtolower($this->password));
+        header('Content-Type: text/html; charset=windows-1251');
+      //  echo md5($this->password);
+        $users = Clients::model()->find("LOWER(login)=:username and password=:password",array(":username"=>$username,":password"=>md5($password)));
 
-        $username=strtolower($this->username);
-
-        $user=UserFront::model()->find('LOWER(login)=:username',array(':username'=>$username));
-
-        if($user===null) {
+        if($users===null){
             $this->errorCode=self::ERROR_USERNAME_INVALID;
-
-        }
-
-        else if(!$user->validatePassword($this->password)) {
-            $this->errorCode=self::ERROR_PASSWORD_INVALID;
-
         }
         else
         {
-            $this->_id=$user->id;
-            $this->_state="front";
-            $this->username=$user->login;
+            $this->_id=$users->id;
             $this->errorCode=self::ERROR_NONE;
-
         }
-
         return $this->errorCode==self::ERROR_NONE;
     }
 
@@ -49,14 +41,4 @@ class UserIdentityFront extends CUserIdentity
     {
         return $this->_id;
     }
-
-    public function getUserName()
-    {
-        return $this->username;
-    }
-    public function isFront()
-    {
-        return true;
-    }
-
 }

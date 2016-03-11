@@ -32,7 +32,8 @@ class ControlerCPanel extends CController
     public function filters()
     {
         return array(
-            'checkAccess'
+            'checkAccess',
+           // 'preLoadTree'
         );
     }
 
@@ -59,7 +60,7 @@ class ControlerCPanel extends CController
     public  function  filterCheckAccess($filterChain) {
         header('Content-Type: text/html; charset=windows-1251');
            if (Yii::app()->user->isGuest) {
-            $this->redirect($this->createUrl("/login"));
+            $this->redirect($this->createUrl("/static"));
         }
 
         $filterChain->run();
