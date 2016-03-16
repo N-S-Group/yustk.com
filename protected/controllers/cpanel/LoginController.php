@@ -22,12 +22,7 @@ class LoginController extends CController
             $model->attributes=$_POST['loginForm'];
 
             if($model->Login()){
-                switch (Yii::app()->user->role){
-                    case 1: $this->url = '/users'; break;
-                    case 7: $this->url = '/users'; break;
-                }
-
-                $this->redirect($this->createUrl($this->url));
+                $this->redirect($this->createUrl('/users'));
             }
         }
         $this->render('index', array("model"=>$model));
@@ -39,7 +34,7 @@ class LoginController extends CController
         // renders the view file 'protected/views/front/index.php'
         // using the default layout 'protected/views/layouts/main.php'
         Yii::app()->user->logout();
-        $this->redirect($this->createUrl("."));
+        $this->redirect($this->createUrl("../."));
     }
 
 

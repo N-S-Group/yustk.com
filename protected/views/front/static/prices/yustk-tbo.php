@@ -10,7 +10,7 @@
 
     <br>
     <br>
-
+    <?$data = Service::getData(); $i=1;?>
     <table class="price">
         <thead>
         <tr>
@@ -22,7 +22,37 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <?foreach($data as $item):?>
+            <tr>
+                <td><?=$i?></td>
+                <td><?=$item->title;?></td>
+                <td><?=$item->unit;?></td>
+                <td><?=($item->price>0)?$item->price:'';?></td>
+                <?if(strlen($item->description)>68):?>
+                <td><a href="#" class="show">Заказать&nbsp;услугу</a></td>
+                <?endif;?>
+            </tr>
+            <?if(strlen($item->description)>68):?>
+                    <tr class="description" style='border-bottom: 2px solid #000000 !important;  display: none'>
+                    <td colspan='6'>
+                    <?=$item->description;?>
+                    <br><a href='#' class='close'>Закрыть</a>
+                    </td>
+                    </tr>
+            <?endif;?>
+            <?foreach(Service::getRelationData($item->id) as $key ){?>
+                <tr>
+                    <td></td>
+                    <td><?=$key->title;?></td>
+                    <td><?=$key->unit;?></td>
+                    <td><?=($key->price>0)?$key->price:'';?></td>
+                    <td></td>
+                </tr>
+            <?}?>
+            <?$i++;?>
+        <?endforeach;?>
+
+      <!--  <tr>
             <td>1</td>
             <td>Услуги подвоза технической воды машиной КАМАЗ (емкость цистерны 10 м.куб.)</td>
             <td>1 рейс</td>
@@ -189,7 +219,7 @@
             <td></td>
             <td>250</td>
             <td></td>
-        </tr>
+        </tr>-->
 
 
         </tbody>

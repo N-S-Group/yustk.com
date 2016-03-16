@@ -9,4 +9,4 @@
     <div class="clear"></div>
 </div>
 
-<?=$this->renderPartial("_form",array('role'=>$role));?>
+<?=$this->renderPartial("_form",array('model'=>$model));?>

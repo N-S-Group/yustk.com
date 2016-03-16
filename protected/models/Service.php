@@ -14,4 +14,11 @@ class Service extends BaseService
             'condition'=>"`delete`=0",
         );
     }
+
+    public function getData(){
+        return Service::model()->findAll("`pid` is null");
+    }
+    public function getRelationData($id){
+        return Service::model()->findAll("`pid`=".$id);
+    }
 }

@@ -27,7 +27,15 @@
 
 
 <script>
-    $(".createOrder4").click(function(){
+
+    $(".show").click(function(){
+        closeAll();
+        var tr = $(this).parent().parent();
+        tr.next(".description").fadeIn();
+        return false;
+    });
+
+   /* $(".createOrder4").click(function(){
         var length = $("body").find("#createOrder4").length;
         closeAll()
         var tr = $(this).parent().parent();
@@ -57,7 +65,6 @@
         $("#createOrder5").fadeIn();
         return false;
     });
-
 
     $(".createOrder6").click(function(){
         var length = $("body").find("#createOrder6").length;
@@ -97,21 +104,24 @@
 
         $("#createOrder3").fadeIn();
         return false;
-    });
+    });*/
 
 
 
-    $( "body").delegate(".close","click",function(){
+   /* $( "body").delegate(".close","click",function(){
 
         closeAll()
 
         return false;
+    });*/
+
+    $(".close").click(function(){
+       $(this).parent().parent().fadeOut(); return false;
     });
 
-
     function closeAll(){
-
-        $("#createOrder3, #createOrder6, #createOrder5, #createOrder4").fadeOut();
+          $(".description").fadeOut();
+        //$("#createOrder3, #createOrder6, #createOrder5, #createOrder4").fadeOut();
     }
 
 </script>

@@ -309,9 +309,12 @@ a.green1 {color: #4aa737}
 .footer_menu { position: absolute; top: 10px; left: 350px}
 .footer_logo {position: absolute; top: 10px; left: 700px; font-family: tahoma}
 
-
+strong{
+    font-weight: 600 !important;
+}
 .price { width:90% }
-.price tr:hover { background-color: rgba(0, 123, 214, 0.10)
+.price tr:hover {
+    background-color: rgba(0, 123, 214, 0.10);
 }
 
 .price td {padding: 6px; vertical-align: top}

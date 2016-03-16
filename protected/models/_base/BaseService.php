@@ -50,7 +50,7 @@ abstract class BaseService extends GxActiveRecord {
 	}
 
 	public function relations() {
-		return array(
+		return array('Service'=>array(self::HAS_MANY, 'Service', array('id'=>'pid'))
 		);
 	}
 

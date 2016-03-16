@@ -24,8 +24,8 @@ class CommentsController extends ControlerCPanel
 
         }
 
-        header('Content-Type: text/html; charset=windows-1251');
-        $this->render("_form",array('model'=> $model));
+      //  header('Content-Type: text/html; charset=windows-1251');
+        $this->render("edit",array('model'=> $model));
     }
 
     public function actionEditRecord(){

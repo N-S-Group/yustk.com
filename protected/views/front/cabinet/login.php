@@ -1,6 +1,6 @@
 <div class="login">
     <span><b>ЛИЧНЫЙ КАБИНЕТ:</b></span><br>
-    ИМЯ ПОЛЬЗОВАТЕЛЯ: <input type="text" value="" id="login"> ПАРОЛЬ: <input type="text" value="" id="password"><br>
+    ИМЯ ПОЛЬЗОВАТЕЛЯ: <input type="text" value="" id="login"> ПАРОЛЬ: <input type="password" value="" id="password"><br>
 
     <a href="">РЕГИСТРАЦИЯ</a>&nbsp;&nbsp;&nbsp;
     <a href="#modal">ЗАБЫЛИ ПАРОЛЬ</a>&nbsp;&nbsp;&nbsp;
@@ -24,6 +24,6 @@
 
     <button type="button"  class="confirm" value="Восстановить">Восстановить
         <br>
-    <!--<a class="remodal-cancel" href="#">Отмена</a>-->
-    <!--<a class="remodal-confirm" href="#">Восстановить</a>-->
+        <!--<a class="remodal-cancel" href="#">Отмена</a>-->
+        <!--<a class="remodal-confirm" href="#">Восстановить</a>-->
 </div>

@@ -58,11 +58,9 @@
 <!-- Left side content -->
 
     <ul class="nav" id="menu">
-        <?if(Yii::app()->user->role==4):?>
             <li class="ui"><a title="" href="<?=$this->createUrl('users/index');?>"><span>Пользователи</span></a></li>
             <li class="comments"><a title="" href="<?=$this->createUrl('comments/index');?>"><span>Отзывы</span></a></li>
-         <li class="gallery_front"><a title="" href="<?=$this->createUrl('service/index');?>"><span>Услуги</span></a></li>
-        <?endif;?>
+            <li class="gallery_front"><a title="" href="<?=$this->createUrl('service/index');?>"><span>Услуги</span></a></li>
     </ul>
 
 </div>

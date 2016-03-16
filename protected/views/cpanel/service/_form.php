@@ -51,7 +51,7 @@
 
 <script>
 
-    tinymce.init({language : "ru",selector:'textarea',menubar: false,toolbar: "bold italic underline",forced_root_block : false,
+    tinymce.init({language : "ru",selector:'textarea',plugins: ["table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"],menubar: false,toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify removeformat forecolor backcolor",forced_root_block : false,
         force_br_newlines : true,
         force_p_newlines : false});
 
