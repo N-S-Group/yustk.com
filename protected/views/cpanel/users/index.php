@@ -1,7 +1,7 @@
 <? $this->widget('application.widgets.GridAdmin',
     array(
          "columns" => array(
-             Array("name"=>"Имя", "width"=>false, "sorteble"=>true, "searcheble" => true),
+             Array("name"=>"Имя", "width"=>false, "sorteble"=>true, "searcheble" => true, "noCenterAlig"=>true),
              Array("name"=>"Логин", "width"=>false, "sorteble"=>true, "searcheble" => true),
              Array("name"=>"Телефон", "width"=>false, "sorteble"=>true, "searcheble" => true),
              Array("name"=>"Тип", "width"=>false, "sorteble"=>true, "searcheble" => true),
