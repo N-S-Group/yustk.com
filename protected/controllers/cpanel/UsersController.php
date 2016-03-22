@@ -43,6 +43,7 @@ class UsersController extends ControlerCPanel
     public function actionEditRecord(){
         $model = (isset($_GET['cl']) && $_GET['cl'] == 1)?Clients::model()->findByPk( (int)$_GET['edit'] ):Users::model()->findByPk( (int)$_GET['edit'] );
         $model->attributes = $_POST;
+        $model->name = MYChtml::filterJSON($_POST['name']);
         if($_GET['cl'] == 1 && $_POST['role'] == 4) $model = $this->toUsers($model,$_GET['edit'],$_POST);
         if($_GET['cl'] == 2 && $_POST['role'] == 1) $model = $this->toClient($model,$_GET['edit'],$_POST);
         if(isset($_GET['cl']) && $_GET['cl'] == 2 && $_POST['role'] == 4) $model->phone = AccessoryFunctions::clearTel($_POST['phone']);
@@ -57,6 +58,7 @@ class UsersController extends ControlerCPanel
     public function actionAdd(){
         $model = $_POST['role'] == 1?new Clients:new Users;
         $model->attributes = $_POST;
+        $model->name = MYChtml::filterJSON($_POST['name']);
         if($_POST['role'] == 4) $model->phone = AccessoryFunctions::clearTel($_POST['phone']);
         $model->password = md5($_POST['pass']);
         if(!$model->save()) $this->save = "error";

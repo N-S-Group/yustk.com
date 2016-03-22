@@ -22,7 +22,7 @@
         <br><span id="showerrorsEmail" style="color: red;"></span>
     </p>
 
-    <button type="button"  class="confirm" value="Восстановить">Восстановить
+    <button type="button" class="confirm" value="Восстановить">Восстановить
         <br>
         <!--<a class="remodal-cancel" href="#">Отмена</a>-->
         <!--<a class="remodal-confirm" href="#">Восстановить</a>-->

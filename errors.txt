@@ -1,0 +1,18 @@
+Array
+(
+    [code] => 2
+    [message] => Invalid argument supplied for foreach()
+    [file] => C:\Program Files (x86)\Apache Group\Apache2\htdocs\yustk.com\protected\helpers\MYChtml.php
+    [line] => 93
+    [userId] => 6
+    [date] => 2016-03-22 14:07:27
+)
+Array
+(
+    [code] => 2
+    [message] => Invalid argument supplied for foreach()
+    [file] => C:\Program Files (x86)\Apache Group\Apache2\htdocs\yustk.com\protected\helpers\MYChtml.php
+    [line] => 94
+    [userId] => 6
+    [date] => 2016-03-22 14:08:53
+)

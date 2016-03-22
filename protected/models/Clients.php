@@ -8,6 +8,17 @@ class Clients extends BaseClients
 		return parent::model($className);
 	}
 
+    public static function getData(){
+        $data = array("user",'clientAgreements'=>array());
+        $user = Clients::model()->findByPk( Yii::app()->user->getId() );
+        $data['user'] = $user->name;
+        if($clientAgreements = ClientAgreements::model()->findAll("`client_id`=:client",array(":client"=>$user->id))){
+           foreach($clientAgreements as $key){
+               array_push($data['clientAgreements'],array('id'=>$key->id,'name'=>$key->number));
+           }
+        }
+        return $data;
+    }
 
     public function defaultScope()
     {

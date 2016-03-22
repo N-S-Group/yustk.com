@@ -2,33 +2,36 @@
 
     <h3>Типовые договора</h3><br>
 
+    <?if($data = StandartAgreements::getData()){?>
+        <table class="price">
+            <thead>
+            <tr>
+                <td>Дата размещения</td>
+                <td>Наименование документов</td>
+                <td>Скачать</td>
 
+            </tr>
+            </thead>
+            <tbody>
 
+            <?foreach($data as $item):?>
+                <tr>
+                <td><?=MYDate::contactsDate($item->date);?></td>
+                <td><?=$item->name;?></td>
+                <td>
+                   <?if($img = MYChtml::getImage('agreements/'.$item->id,'agreements')):?>
+                        <a href="<?php echo Yii::app()->request->baseUrl;?>/uploads/<?=$img;?>" download>
+                            Скачать
+                        </a>
+                    <?endif;?>
+                </td>
+                </tr>
+            <?endforeach;?>
 
+            </tbody>
 
-    <table class="price">
-        <thead>
-        <tr>
-            <td>Дата размещения<td>
-            <td>Наименование документов<td>
-            <td>Скачать</td>
-
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>12.01.2015<td>
-            <td>Договор на вывоз ТКО</td>
-            <td><a href="">Cкачать</a></td>
-        </tr>
-
-        <tr>
-            <td>12.01.2015<td>
-            <td>Договор на вывоз ТКО</td>
-            <td><a href="">Cкачать</a></td>
-        </tr>
-        </tbody>
-
-    </table>
-
+        </table>
+    <?}else{?>
+        <b>список договоров пуст</b>
+    <?}?>
 </div>

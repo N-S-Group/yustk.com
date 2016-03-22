@@ -1,6 +1,5 @@
 <div class="main content">
 <h3>Книга отзывов.</h3>
-
     <?if (count($comments)):?>
     <b>На данный момент отзывов в книге нет</b>
     <br><br>

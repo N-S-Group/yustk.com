@@ -1,6 +1,6 @@
 <?php
 
-class StaticController extends CController
+class StaticController extends Controller
 {
 
 
@@ -15,28 +15,14 @@ class StaticController extends CController
     public $path = "http://localhost/yustk.com";
     public $courSection = "";
     public $courCount = 4;
-    public function filters()
-    {
-        return array(
-            'preLoadTree'
-        );
-    }
 
-    public function actiongetGenerate(){
-        $id = false;
-        $l = false;
-        if(isset($_GET['id']) && isset($_GET['g'])){
-           if($m = Clients::getGenerate($_GET['id'],$_GET['g'])){
-               $id = $m->id;
-               $l = $m->login;
-           }
-        }
-        $this->render("recovery",array("id"=>$id,'l'=>$l));
+    protected  function createData($data){
+        $time = strtotime($data);
+        return "<span>".date("d",$time)."</span><br>".MYDate::shortMonth(date("m",$time));
     }
 
     public function filterPreLoadTree($filterChain)
     {
-
         $filterChain->run();
         return true;
     }
@@ -97,20 +83,27 @@ class StaticController extends CController
                 $this->courSection = "guest-book";
                 $this->title = "Обращение к директору";
                 $this->description = "Обращение к директору";
-
-                if (Yii::app()->request->isPostRequest) {
-                    $this->sendMail();
-                }
+                    if (Yii::app()->request->isPostRequest) {
+                        $this->sendMail();
+                    }
 
                 $this->section = "guest-book"; $this->isMain=true; $this->render("director");
 
                 break;
 
                 case "guest-book":
+
+                    if (Yii::app()->request->isPostRequest){
+                        $this->sendCommentToBD();
+                    }
+
+                    $comments = Comments::model()->findAll(array("condition"=>"confirm = 1","order"=>"id desc", "limit"=>20));
+                    if (!$comments) $comments = Array();
+
                 $this->courSection = "guest-book";
                 $this->title = "Отзывы";
                 $this->description = "Отзывы";
-                $this->section = "guest-book"; $this->isMain=true; $this->render("guestbook");
+                $this->section = "guest-book"; $this->isMain=true; $this->render("guestbook", array("comments"=>$comments));
 
                 break;
 
@@ -124,7 +117,6 @@ class StaticController extends CController
 
             default:
                 $this->title = "ЮСТК";
-
                 $this->description = "ЮСТК";
                 $this->courSection = "index";
                 $this->section = "index"; $this->isMain=true; $this->render("index");
@@ -133,9 +125,9 @@ class StaticController extends CController
 
     }
 
-    public function actionError() {
+   /* public function actionError() {
         $this->renderPartial("/error/index");
-    }
+    }*/
 
 
     private function toArray($secret,$response)
@@ -145,11 +137,20 @@ class StaticController extends CController
         return $params;
     }
 
-    private  function  checkReCaptcha()
+    private  function  checkReCaptcha($post)
     {
+        if(isset($post['g-recaptcha-response'])){
+            $captcha = $post['g-recaptcha-response'];
+        }
+        if(!$captcha) return false;
 
+        $secretKey = "6LdCWRoTAAAAAEPizgC2ZzZNdqllbdiei8gml9go";
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$captcha."&remoteip=".$ip);
+        $responseKeys = json_decode($response,true);
+        return (intval($responseKeys["success"]) !== 1) ?false:true;
 
-        /* $peer_key = version_compare(PHP_VERSION, '5.6.0', '<') ? 'CN_name' : 'peer_name';
+      /* $peer_key = version_compare(PHP_VERSION, '5.6.0', '<') ? 'CN_name' : 'peer_name';
         $options = array(
             'http' => array(
                 'header' => "Content-type: application/x-www-form-urlencoded\r\n",
@@ -164,53 +165,48 @@ class StaticController extends CController
         $context = stream_context_create($options);
 
         $p = file_get_contents("https://www.google.com/recaptcha/api/siteverify", false);
-     print_r($p); */
-        return true;
-
+        $object = json_decode($p,true);
+        echo $object->success;*/
 
         }
 
+    public function actiongetGenerate(){
+        $id = false;
+        $l = false;
+        if(isset($_GET['uid']) && isset($_GET['g'])){
+            if($m = Clients::getGenerate($_GET['uid'],$_GET['g'])){
+                $id = $m->id;
+                $l = $m->login;
+            }
+        }
+        $this->render("recovery",array("id"=>$id,'l'=>$l));
+    }
+
+    private function sendCommentToBD(){
+        $comment = new Comments();
+        $comment->attributes = $_POST["comment"];
+        $comment->date_create = new CDbExpression("NOW()");
+        if ($comment->save()) {
+
+            echo "<script>alert('Ваш отзыв будет опубликован после проверки администрацией сайта.')</script>";
+
+        } else {
+
+            echo "<script>alert('Произошла ошибка, отзыв не будет опубликован.')</script>";
+        }
+    }
 
     public function sendMail(){
-      if ($this->checkReCaptcha()){
-
-              MYMail::MailerTo('bablgum@mail.ru',"Обращение к директору с сайта yustk.com");
-              Yii::app()->mailer->MsgHTML($this->renderPartial(Yii::app()->mailer->pathViews, array('post'=>$_POST["mail"]),true));
-              if(Yii::app()->mailer->send()){
-                  echo "<script>alert('Ваше сообщение отправлено директору ООО ЮСТК.')</script>";
-              }else{
-                  echo "<script>alert('Неизвестная ошибка при отправке сообщения, повторите позже.')</script>";
-              }
-
-        /*   $__smtp=Yii::app()->params['smtp'];
-
-            Yii::app()->mailer->Host = $__smtp['host'];
-            Yii::app()->mailer->Port = $__smtp['port'];
-            Yii::app()->mailer->IsSMTP();
-
-
-            Yii::app()->mailer->Subject = "Обращение к директору с сайта yustk.com";
-            Yii::app()->mailer->SMTPAuth = $__smtp['auth'];
-            Yii::app()->mailer->Username = $__smtp['username'];
-            Yii::app()->mailer->Password = $__smtp['password'];
-            Yii::app()->mailer->SMTPDebug = $__smtp['debug'];
-            Yii::app()->mailer->From = $__smtp['from'];
-            Yii::app()->mailer->FromName = $__smtp['fromname'];
-            Yii::app()->mailer->AddAddress("bablgum@mail.ru"); //bablgum@mail.ru
-
-            Yii::app()->mailer->MsgHTML($this->renderPartial(Yii::app()->mailer->pathViews, array('post'=>$_POST["mail"]),true));
-            Yii::app()->mailer->CharSet = "windows-1251";
-            if(Yii::app()->mailer->send()){
-               echo "<script>alert('Ваше сообщение отправлено директору ООО ЮСТК.')</script>";
-            }else{
-                echo "<script>alert('Неизвестная ошибка при отправке сообщения, повторите позже.')</script>";
-            }*/
-
-        }else{
-              echo  "<script>alert('Контрольный код введен не верно.')</script>";
+      if ($this->checkReCaptcha($_POST)){
+          MYMail::MailerTo(Yii::app()->params['settings']['mailMain'],"Обращение к директору с сайта yustk.com");
+          Yii::app()->mailer->CharSet = "windows-1251";
+          Yii::app()->mailer->MsgHTML($this->renderPartial(Yii::app()->mailer->pathViews, array('post'=>$_POST["mail"]),true));
+          if(Yii::app()->mailer->send()){
+              echo "<script>alert('Ваше сообщение отправлено директору ООО ЮСТК.')</script>";
+          }else{
+              echo "<script>alert('Неизвестная ошибка при отправке сообщения, повторите позже.')</script>";
+          }
         }
-
-
     }
 
 

@@ -61,6 +61,8 @@
             <li class="ui"><a title="" href="<?=$this->createUrl('users/index');?>"><span>Пользователи</span></a></li>
             <li class="comments"><a title="" href="<?=$this->createUrl('comments/index');?>"><span>Отзывы</span></a></li>
             <li class="gallery_front"><a title="" href="<?=$this->createUrl('service/index');?>"><span>Услуги</span></a></li>
+            <li class="gallery_front"><a title="" href="<?=$this->createUrl('clientagreements/index');?>"><span>Договора</span></a></li>
+            <li class="gallery_front"><a title="" href="<?=$this->createUrl('standartagreements/index');?>"><span>Типовые договора</span></a></li>
     </ul>
 
 </div>

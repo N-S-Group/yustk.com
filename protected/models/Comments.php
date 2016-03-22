@@ -15,6 +15,10 @@ class Comments extends BaseComments
         );
     }
 
+    public static function getAll(){
+        return Comments::model()->findAll(array("condition"=>"`confirm`=0","order"=>"id desc"));
+    }
+
     public static function editModelByPk($id){
         $model = self::getModelByPk($id);
         $model->text = MYChtml::toWindows1251(trim($_POST['text']));

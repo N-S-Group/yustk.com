@@ -6,6 +6,12 @@ class LoginController extends Controller
             $this->redirect($this->createUrl('/cpanel/'));
         }
 
+    public function filterPreLoadTree($filterChain)
+    {
+        $filterChain->run();
+        return true;
+    }
+
         public function echoAjaxMessage($message){
             echo $message;
             die();

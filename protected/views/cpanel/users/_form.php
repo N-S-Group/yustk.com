@@ -9,7 +9,7 @@
             <div class="formRow">
                 <label>Имя:</label>
                 <div class="formRight">
-                    <input type="text" value="<?=$this->model->name;?>" name='name' style="width:260px;"/><span class="formNote"></span>
+                    <input type="text" value="<?=MYChtml::filterJSON($this->model->name);?>" name='name' style="width:260px;"/><span class="formNote"></span>
                 </div>
                 <div class="clear"></div>
             </div>

@@ -35,7 +35,7 @@
         return false;
     });
 
-   /* $(".createOrder4").click(function(){
+  $(".createOrder4").click(function(){
         var length = $("body").find("#createOrder4").length;
         closeAll()
         var tr = $(this).parent().parent();
@@ -104,7 +104,7 @@
 
         $("#createOrder3").fadeIn();
         return false;
-    });*/
+    });
 
 
 

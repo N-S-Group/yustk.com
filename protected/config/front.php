@@ -13,6 +13,7 @@ return CMap::mergeArray(
         'class' => 'application.extensions.mailer.EMailer',
         'pathViews' => 'application.views.front.mail.sendmail.index',
         'recoveryPassword' => 'application.views.front.mail.sendmail.recovery',
+        'request_act' => 'application.views.front.mail.sendmail.request_act',
         'pathLayouts' => 'application.views.front.mail.sendmail.layouts'
     ),
 

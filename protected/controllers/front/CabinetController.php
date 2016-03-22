@@ -16,13 +16,6 @@ class CabinetController extends ControlerCPanel
     public $courSection = "";
     public $courCount = 4;
 
-  /*  public function filters()
-    {
-        return array(
-            'preLoadTree'
-        );
-    }*/
-
     public function filterPreLoadTree($filterChain)
     {
 
@@ -63,9 +56,9 @@ class CabinetController extends ControlerCPanel
     }
 
 
-    public function actionError() {
+  /*  public function actionError() {
         $this->renderPartial("/error/index");
-    }
+    }*/
 
 
 

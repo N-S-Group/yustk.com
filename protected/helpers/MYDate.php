@@ -22,6 +22,11 @@ class MYDate
 		
 		    return $result;
 		}
+
+    static function contactsDate($data){
+        $e = explode("-",$data);
+        return $e[2].".".$e[1].".".$e[0];
+    }
 		
 		static function _date_range_limit_days($base, $result)
 		{

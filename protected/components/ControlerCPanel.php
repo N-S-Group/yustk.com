@@ -32,9 +32,16 @@ class ControlerCPanel extends CController
     public function filters()
     {
         return array(
+            'checkErrors',
             'checkAccess',
            // 'preLoadTree'
         );
+    }
+
+    public function filtercheckErrors($filterChain){
+         Yii::app()->attachEventHandler('onError',array($this,'handleError'));
+         Yii::app()->attachEventHandler('onException',array($this,'handleError'));
+        $filterChain->run();
     }
 
     public function uploadFile($name,$object){
@@ -67,27 +74,64 @@ class ControlerCPanel extends CController
         return true;
     }
 
-    public function MailerTo($item,$model){
-        $__smtp=Yii::app()->params['smtp'];
 
-        Yii::app()->mailer->Host = $__smtp['host'];
-        Yii::app()->mailer->Port = $__smtp['port'];
-        Yii::app()->mailer->IsSMTP();
-        Yii::app()->mailer->SMTPAuth = $__smtp['auth'];
-        Yii::app()->mailer->Username = $__smtp['username'];
-        Yii::app()->mailer->Password = $__smtp['password'];
-        Yii::app()->mailer->SMTPDebug = $__smtp['debug'];
-        Yii::app()->mailer->From = $__smtp['from'];
-        Yii::app()->mailer->FromName = iconv("windows-1251","UTF-8",$__smtp['fromname']);
+    public function actionError()
+    {
+        if($error=Yii::app()->errorHandler->error)
+        {
+            if(Yii::app()->request->isAjaxRequest)
+                echo $error['message'];
 
-        Yii::app()->mailer->AddAddress($item->email); //bablgum@mail.ru
-        Yii::app()->mailer->Subject = iconv("windows-1251","UTF-8",$model->title);
-        Yii::app()->mailer->MsgHTML(iconv("windows-1251","UTF-8",$this->renderPartial('//clearRender', array('model'=>$model,'item'=>$item),true)));
-        Yii::app()->mailer->CharSet = "UTF-8";
-        if(Yii::app()->mailer->send())	return true;
-        else return false;
+            else
+                $this->renderPartial('application.views.404.404');
+        }
     }
 
+    public function init(){
+        parent::init();
+        Yii::app()->errorHandler->errorAction=$this->actionError();
+    }
 
+    public function handleError(CEvent $event)
+    {
+        if ($event instanceof CExceptionEvent)
+        {
+            $statusCode = $event->exception->statusCode;
+            $body = array(
+                'code' => $event->exception->getCode(),
+                'message' => $event->exception->getMessage(),
+                'file' => YII_DEBUG ? $event->exception->getFile() : '*',
+                'line' => YII_DEBUG ? $event->exception->getLine() : '*'
+            );
+        }
+        elseif($event instanceof CErrorEvent)
+        {
+            $body = array(
+                'code' => $event->code,
+                'message' => $event->message,
+                'file' => YII_DEBUG ? $event->file : '*',
+                'line' => YII_DEBUG ? $event->line : '*'
+            );
+        }
+        $event->handled = TRUE;
+        $body['userId'] = ($id = Yii::app()->user->getId())?$id:'isGuest';
+        $body['date'] = date("Y-m-d H:i:s");
+
+        $w=fopen('errors.txt','a-');
+        fwrite($w,print_r($body,true));
+        fclose($w);
+
+        if(Yii::app()->request->isAjaxRequest){
+            echo "error";
+            die();
+        }else{
+            $this->renderPartial('application.views.404.404');
+            die();
+        }
+    }
+
+    public function action404(){
+        $this->renderPartial('application.views.404.404');
+    }
 
 }

@@ -93,6 +93,8 @@ $(document).ready(function(){
     });
 
       $(".confirm").click(function(){
+          if( $("#showerrorsEmail img").length>0 ) return false;
+
           $("#showerrorsEmail").text('');
           $("#showerrorsEmail").css('color','red');
           var email = $.trim($("#email").val());
@@ -103,16 +105,16 @@ $(document).ready(function(){
                   $("#validEmail").css({
                       "background-image": "url('images/validYes.png')"
                   });
-                  $("#showerrorsEmail").html("<img src='"+url+"/images/loaders/loader27.gif'>");
+                  $("#showerrorsEmail").html("<img class='go' src='"+url+"/images/loaders/loader27.gif'>");
                   $.post(url+"/login/restore",{email:$.trim($("#email").val())},function(data){
                     switch (parseInt(data)){
                         case 10: $("#showerrorsEmail").text('Пользователь с таким email не зарегистрирован'); break;
-                        case 11: $("#showerrorsEmail").css('color','green').text('Письмо для восстановление пароля выслана вам на email'); break;
+                        case 11: $("#showerrorsEmail").css('color','green').text('Письмо для восстановление пароля выслано вам на email'); break;
                         case 12: $("#showerrorsEmail").css('color','red').text('При отправке письма что-то пошло не так. Попробуйте позже.'); break;
                     }
                   });
 
-              } else {
+              }else{
                   $("#validEmail").css({
                       "background-image": "url('images/validNo.png')"
                   });

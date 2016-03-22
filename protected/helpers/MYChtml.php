@@ -90,6 +90,7 @@ class MYChtml extends  CHtml
 
     public static function getImage($folder,$name){
         $a = @scandir( Yii::getPathOfAlias('webroot')."/uploads/".$folder );
+        if(count($a)<3) return false;
         foreach($a as $item){
             if($name == substr($item,0,strpos($item,"."))) return $folder."/".$item;
         }

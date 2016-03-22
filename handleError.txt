@@ -1,0 +1,45 @@
+Array
+(
+    [code] => 0
+    [message] => Контроллер UsersController не может найти представление "application.views.404".
+    [file] => C:\Program Files (x86)\Apache Group\Apache2\htdocs\framework\web\CController.php
+    [line] => 879
+    [userId] => 1
+    [date] => 2016-03-16 15:25:07
+)
+Array
+(
+    [code] => 0
+    [message] => Контроллер UsersController не может найти представление "application.views.404".
+    [file] => C:\Program Files (x86)\Apache Group\Apache2\htdocs\framework\web\CController.php
+    [line] => 879
+    [userId] => 1
+    [date] => 2016-03-16 15:28:00
+)
+Array
+(
+    [code] => 0
+    [message] => Контроллер UsersController не может найти представление "application.views.404".
+    [file] => C:\Program Files (x86)\Apache Group\Apache2\htdocs\framework\web\CController.php
+    [line] => 879
+    [userId] => 1
+    [date] => 2016-03-16 15:28:01
+)
+Array
+(
+    [code] => 0
+    [message] => Контроллер UsersController не может найти представление "application.views.404".
+    [file] => C:\Program Files (x86)\Apache Group\Apache2\htdocs\framework\web\CController.php
+    [line] => 879
+    [userId] => 1
+    [date] => 2016-03-16 15:28:02
+)
+Array
+(
+    [code] => 0
+    [message] => Контроллер UsersController не может найти представление "application.views.404".
+    [file] => C:\Program Files (x86)\Apache Group\Apache2\htdocs\framework\web\CController.php
+    [line] => 879
+    [userId] => 1
+    [date] => 2016-03-16 15:28:06
+)

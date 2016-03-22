@@ -20,54 +20,78 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
-
-
-    //-----------Функция удаления директории----------//
-
-    public function DeleteDir($dir,$exp=''){
-        if ($objs = glob($dir."/*")) {
-            foreach($objs as $obj) {
-                is_dir($obj) ? $this->DeleteDir($obj,$exp) : unlink($obj);
-            }
-        }
-        @rmdir($dir);
+    public function filters()
+    {
+        return array(
+            'checkErrors',
+            'preLoadTree'
+        );
     }
 
-    //-----------------------------------------------//
-
-
-    public function ResizeOrigin($dir,$name,$width){
-
-        $size=GetImageSize ($dir);
-        switch (substr($dir,strpos($dir,"."))) {
-            case '.jpg': $src = @imagecreatefromjpeg($dir); break;
-            case '.gif': $src = @imagecreatefromgif($dir); break;
-            case '.png': $src = @imagecreatefrompng($dir); break;
-        }
-        $iw=$size[0];
-        $ih=$size[1];
-
-        $ratio = $iw/$width;
-        $w_dest = round($iw/$ratio);
-        $h_dest = round($ih/$ratio);
-        $dst=ImageCreateTrueColor ($w_dest, $h_dest);
-        ImageCopyResampled ($dst, $src, 0, 0, 0, 0, $w_dest, $h_dest, $iw, $ih);
-        $url = "";
-
-        switch (substr($dir,strpos($dir,"."))) {
-
-            case '.jpg': imagejpeg($dst, $name, 80);
-                break;
-
-            case '.gif': imagegif($dst, $name, 80);
-                break;
-
-            case '.png': imagepng($dst, $name, 0);
-                break;
-
-        }
-        imagedestroy($src);
+    public function filtercheckErrors($filterChain){
+        Yii::app()->attachEventHandler('onError',array($this,'handleError'));
+        Yii::app()->attachEventHandler('onException',array($this,'handleError'));
+        $filterChain->run();
     }
 
+
+   public function actionError()
+    {
+        if($error=Yii::app()->errorHandler->error)
+        {
+            if(Yii::app()->request->isAjaxRequest)
+              echo $error['message'];
+
+            else
+                $this->renderPartial('application.views.404.404');
+        }
+    }
+
+    public function init(){
+        parent::init();
+       // Yii::app()->errorHandler->errorAction=$this->actionError();
+    }
+
+    public function handleError(CEvent $event)
+    {
+        if ($event instanceof CExceptionEvent)
+        {
+            $statusCode = $event->exception->statusCode;
+            $body = array(
+                'code' => $event->exception->getCode(),
+                'message' => $event->exception->getMessage(),
+                'file' => YII_DEBUG ? $event->exception->getFile() : '*',
+                'line' => YII_DEBUG ? $event->exception->getLine() : '*'
+            );
+        }
+        elseif($event instanceof CErrorEvent)
+        {
+            $body = array(
+                'code' => $event->code,
+                'message' => $event->message,
+                'file' => YII_DEBUG ? $event->file : '*',
+                'line' => YII_DEBUG ? $event->line : '*'
+            );
+        }
+        $event->handled = TRUE;
+        $body['userId'] = ($id = Yii::app()->user->getId())?$id:'isGuest';
+        $body['date'] = date("Y-m-d H:i:s");
+
+        $w=fopen('errors.txt','a-');
+        fwrite($w,print_r($body,true));
+        fclose($w);
+
+        if(Yii::app()->request->isAjaxRequest){
+            echo "error";
+            die();
+        }else{
+            $this->renderPartial('application.views.404.404');
+            die();
+        }
+    }
+
+    public function action404(){
+        $this->renderPartial('application.views.404.404');
+    }
 
 }

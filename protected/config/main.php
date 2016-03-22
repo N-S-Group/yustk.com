@@ -24,7 +24,6 @@ return array(
         'application.components.*',
         'application.helpers.*',
         'ext.giix-components.*', // giix components
-
     ),
 
     'modules'=>array(
@@ -32,7 +31,7 @@ return array(
         'gii'=>array(
             'class'=>'system.gii.GiiModule',
             'password'=>'1111',
-           // 'ipFilters'=>array("127.0.0.1","192.168.0.89"),
+           'ipFilters'=>array(),
             'generatorPaths' => array(
                 'ext.giix-core', // giix generators
             ),
@@ -87,13 +86,13 @@ return array(
             "password" => "q34fsd243df", //??????
             "addreply" => "no-reply@yustk.com", //??? ?-mail
             "replyto" => "", //e-mail ??????
-            "fromname" => "Форма обратной связи", //???
+            "fromname" => "Письмо с сайта yustk.com", //???
             "from" => "no-reply@yustk.com", //?? ????
             "charset" => "utf-8", //?? ????
         ),
         'settings'=>array(
-            "mailDirector" => "bablgum@mail.ru",
-            "mailMain"     => "bablgum@mail.ru"
+            "mailDirector" => "mike.anapa@gmail.com",
+            "mailMain"     => "mike.anapa@gmail.com"
         )
     ),
 

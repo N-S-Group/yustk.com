@@ -12,15 +12,17 @@
 
         <tr><td colspan="2" style="vertical-align: middle"><br><b>Дополнительные пожелания:</b><br>
         <textarea style="width: 350px"></textarea></td></tr>
-</table><br>
-        <input type="checkbox"> согласны с <a href="" class="green">условиями</a><br>
-        <input type="submit" value="отправить запрос">
 
+    </table>
+    <br>
+        <input type="checkbox" id="conditions_agree"> согласны с <a href="" class="green">условиями</a><br>
+        <input type="button" id="request_send" value="отправить запрос">
+        <img id="send_load" style="display: none" src="<?=$this->path?>/images/loaders/loader19.gif">
     </p>
 
     <br><br>
 
-    <b class="blues">История заявок</b><br>
+    <!--<b class="blues">История заявок</b><br>
 
     <table class="price">
         <thead>
@@ -48,6 +50,14 @@
         </tr>
         </tbody>
 
-    </table>
-
+    </table>-->
+    <div id="info_request">
+    </div>
 </div>
+<script>
+    var request = 2;
+</script>
+<div class="remodal" data-remodal-id="modal_request">
+    <h1>Ваш запрос отправлен успешно!</h1>
+</div>
+<script src="<?=$this->path?>/js/request.js"></script>
