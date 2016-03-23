@@ -25,7 +25,9 @@ class RequestController extends ControlerCPanel
 
     public function actionSaveOrder()
     {
-        if($model = Orders::add($_POST)){
+        $parse_str = array();
+        if(isset($_POST['request2']))    parse_str($_POST['request2'],$parse_str);
+        if($model = Orders::add($_POST,$parse_str)){
             if($model->type == 2) $this->createPdf($model);
             MYMail::MailerTo(Yii::app()->params['settings']['mailMain'],$model->name." (¹".$model->id.")");
             Yii::app()->mailer->MsgHTML($this->renderPartial(Yii::app()->mailer->request_act, array('model'=>$model),true));

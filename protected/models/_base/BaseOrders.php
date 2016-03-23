@@ -14,70 +14,90 @@
  * @property integer $type
  * @property string $date
  * @property integer $agreement_id
+ * @property string $address
+ * @property integer $my_bunkers
+ * @property integer $order_bunker
+ * @property string $description
+ * @property string $date_start
+ * @property string $date_end
  *
  * @property TypesOrders $type0
  */
 abstract class BaseOrders extends GxActiveRecord {
 
-	public static function model($className=__CLASS__) {
-		return parent::model($className);
-	}
+    public static function model($className=__CLASS__) {
+        return parent::model($className);
+    }
 
-	public function tableName() {
-		return 'orders';
-	}
+    public function tableName() {
+        return 'orders';
+    }
 
-	public static function label($n = 1) {
-		return Yii::t('app', 'Orders|Orders', $n);
-	}
+    public static function label($n = 1) {
+        return Yii::t('app', 'Orders|Orders', $n);
+    }
 
-	public static function representingColumn() {
-		return 'name';
-	}
+    public static function representingColumn() {
+        return 'name';
+    }
 
-	public function rules() {
-		return array(
-			array('name, type, agreement_id', 'required'),
-			array('type, agreement_id', 'numerical', 'integerOnly'=>true),
-			array('date', 'safe'),
-			array('date', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, name, type, date, agreement_id', 'safe', 'on'=>'search'),
-		);
-	}
+    public function rules() {
+        return array(
+            array('name, type, agreement_id', 'required'),
+            array('type, agreement_id, my_bunkers, order_bunker', 'numerical', 'integerOnly'=>true),
+            array('address', 'length', 'max'=>255),
+            array('date, description, date_start, date_end', 'safe'),
+            array('date, address, my_bunkers, order_bunker, description, date_start, date_end', 'default', 'setOnEmpty' => true, 'value' => null),
+            array('id, name, type, date, agreement_id, address, my_bunkers, order_bunker, description, date_start, date_end', 'safe', 'on'=>'search'),
+        );
+    }
 
-	public function relations() {
-		return array(
-			'type0' => array(self::BELONGS_TO, 'TypesOrders', 'type'),
-		);
-	}
+    public function relations() {
+        return array(
+            'type0' => array(self::BELONGS_TO, 'TypesOrders', 'type'),
+            'ClientAgreements'=>array(self::HAS_ONE, 'ClientAgreements', array('id'=>'agreement_id'))
+        );
+    }
 
-	public function pivotModels() {
-		return array(
-		);
-	}
+    public function pivotModels() {
+        return array(
+        );
+    }
 
-	public function attributeLabels() {
-		return array(
-			'id' => Yii::t('app', 'ID'),
-			'name' => Yii::t('app', 'Name'),
-			'type' => null,
-			'date' => Yii::t('app', 'Date'),
-			'agreement_id' => Yii::t('app', 'Agreement'),
-			'type0' => null,
-		);
-	}
+    public function attributeLabels() {
+        return array(
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'Name'),
+            'type' => null,
+            'date' => Yii::t('app', 'Date'),
+            'agreement_id' => Yii::t('app', 'Agreement'),
+            'address' => Yii::t('app', 'Address'),
+            'my_bunkers' => Yii::t('app', 'My Bunkers'),
+            'order_bunker' => Yii::t('app', 'Order Bunker'),
+            'description' => Yii::t('app', 'Description'),
+            'date_start' => Yii::t('app', 'Date Start'),
+            'date_end' => Yii::t('app', 'Date End'),
+            'type0' => null,
+        );
+    }
 
-	public function search() {
-		$criteria = new CDbCriteria;
+    public function search() {
+        $criteria = new CDbCriteria;
 
-		$criteria->compare('id', $this->id);
-		$criteria->compare('name', $this->name, true);
-		$criteria->compare('type', $this->type);
-		$criteria->compare('date', $this->date, true);
-		$criteria->compare('agreement_id', $this->agreement_id);
+        $criteria->compare('id', $this->id);
+        $criteria->compare('name', $this->name, true);
+        $criteria->compare('type', $this->type);
+        $criteria->compare('date', $this->date, true);
+        $criteria->compare('agreement_id', $this->agreement_id);
+        $criteria->compare('address', $this->address, true);
+        $criteria->compare('my_bunkers', $this->my_bunkers);
+        $criteria->compare('order_bunker', $this->order_bunker);
+        $criteria->compare('description', $this->description, true);
+        $criteria->compare('date_start', $this->date_start, true);
+        $criteria->compare('date_end', $this->date_end, true);
 
-		return new CActiveDataProvider($this, array(
-			'criteria' => $criteria,
-		));
-	}
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+        ));
+    }
 }

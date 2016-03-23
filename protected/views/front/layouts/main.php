@@ -5,6 +5,8 @@
     <meta charset="windows-1251" />
     <link href="<?=$this->path?>/css/response.css" rel="stylesheet">
     <link href="<?=$this->path?>/css/jquery.remodal.css" rel="stylesheet">
+    <link href="<?=$this->path?>//js/datepicker/themes/classic.css" rel="stylesheet">
+    <link href="<?=$this->path?>//js/datepicker/themes/classic.date.css" rel="stylesheet">
 
     <script src="<?=$this->path?>/js/jquery-1.12.0.min.js"></script>
     <script src="<?=$this->path?>/js/jquery.validate.js"></script>

@@ -11,7 +11,10 @@ class MYPdf
 
 public static function getPdfString($model,$user){
 $name = MYChtml::toUTF8($user->name);
-$order_date = MYDate::contactsDate(date("Y-m-d"));
+$order_date = MYDate::contactsDate($model->date);
+$d = MYDate::contactsDate(date('Y-m-d'));
+$des = (strlen($model->description)>0)?MYChtml::toUTF8($model->description):'-';
+$a = MYChtml::toUTF8($model->address);
 return <<<THIS
 <p style="text-align:right;">Директору</p>
 <h4 style="text-align:center;">Приложение №1<br>к договору на вывоз бункера</h4>
@@ -19,7 +22,7 @@ return <<<THIS
 {$name}
 <br>
 </h3>
-<h3 font-size:14px;>На основании заключенного договора №{$model->id} от {$order_date} г.</h3>
+<h3 font-size:14px;>На основании заключенного договора №{$model->ClientAgreements->number} от {$d} г.</h3>
 <div style="width: 900px;">
 <table style="border: 1px solid black; width: 100%; font-size:16px;">
 
@@ -28,6 +31,7 @@ return <<<THIS
              Дата установки бункера<br>(по согласованию)
             </td>
              <td style="padding: 3px; border: 1px solid black;">
+             {$order_date}
             </td>
         </tr>
 
@@ -36,6 +40,7 @@ return <<<THIS
              Адрес объекта, где будет происходить устанвка/вывоз бункера
             </td>
              <td style="padding: 3px; border: 1px solid black;">
+             {$a}
             </td>
         </tr>
 
@@ -44,6 +49,7 @@ return <<<THIS
              Количество заказываемых бункеров, подлежащих установке
             </td>
              <td style="padding: 3px; border: 1px solid black;">
+              {$model->order_bunker}
             </td>
         </tr>
 
@@ -52,6 +58,7 @@ return <<<THIS
              Количество собственных бункеров, подлежащих вывозу
             </td>
              <td style="padding: 3px; border: 1px solid black;">
+             {$model->my_bunkers}
             </td>
         </tr>
 
@@ -59,8 +66,7 @@ return <<<THIS
 <br>
 <h4 font-size:14px;>В случае невозможности произвести услугу по причинам, не зависящим от Исполнителя, а именно: блокирование доступа машины, отмена рейса без предупреждения и т.п. - Услуга оплачивается полностью.</h4>
 <br><br>
-<h3 font-size:14px;>Дополнительные пожелания _________________________________________________________
-<br><br>_____________________________________________________________________________________<br></h3>
+<h3 font-size:14px;>Дополнительные пожелания: {$des}<br></h3>
 <br>
 <h3>ОПЛАТУ ГАРАНТИРУЕМ!</h3>
 <br>

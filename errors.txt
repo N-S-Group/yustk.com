@@ -1,18 +1,45 @@
 Array
 (
-    [code] => 2
-    [message] => Invalid argument supplied for foreach()
-    [file] => C:\Program Files (x86)\Apache Group\Apache2\htdocs\yustk.com\protected\helpers\MYChtml.php
-    [line] => 93
+    [code] => 0
+    [message] => Контроллер UsersController не может найти представление "application.views.404.font-awesome.min.css".
+    [file] => C:\Program Files (x86)\Apache Group\Apache2\htdocs\framework\web\CController.php
+    [line] => 879
+    [userId] => 1
+    [date] => 2016-03-16 15:44:13
+)
+Array
+(
+    [code] => 0
+    [message] => Контроллер UsersController не может найти представление "application.views.404.font-awesome.min.css".
+    [file] => C:\Program Files (x86)\Apache Group\Apache2\htdocs\framework\web\CController.php
+    [line] => 879
+    [userId] => 1
+    [date] => 2016-03-16 15:44:24
+)
+Array
+(
+    [code] => 0
+    [message] => Контроллер UsersController не может найти представление "application.views.404.font-awesome.min.css".
+    [file] => C:\Program Files (x86)\Apache Group\Apache2\htdocs\framework\web\CController.php
+    [line] => 879
+    [userId] => 1
+    [date] => 2016-03-16 15:44:25
+)
+Array
+(
+    [code] => 42
+    [message] => CDbCommand РЅРµ СѓРґР°Р»РѕСЃСЊ РёСЃРїРѕР»РЅРёС‚СЊ SQL-Р·Р°РїСЂРѕСЃ: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'delete' in 'where clause'. The SQL statement executed was: SELECT * FROM `client_agreements` `t` WHERE (`delete`=0) AND (`client_id`=:client)
+    [file] => /home/y/yustkcom/test/framework/db/CDbCommand.php
+    [line] => 541
     [userId] => 6
-    [date] => 2016-03-22 14:07:27
+    [date] => 2016-03-22 13:56:30
 )
 Array
 (
     [code] => 2
-    [message] => Invalid argument supplied for foreach()
-    [file] => C:\Program Files (x86)\Apache Group\Apache2\htdocs\yustk.com\protected\helpers\MYChtml.php
-    [line] => 94
-    [userId] => 6
-    [date] => 2016-03-22 14:08:53
+    [message] => move_uploaded_file(/home/y/yustkcom/test/public_html/uploads/agreements/2/agreements.txt) [<a href='function.move-uploaded-file'>function.move-uploaded-file</a>]: failed to open stream: Permission denied
+    [file] => /home/y/yustkcom/test/framework/web/CUploadedFile.php
+    [line] => 196
+    [userId] => 1
+    [date] => 2016-03-22 19:22:36
 )

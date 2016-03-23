@@ -6,6 +6,9 @@
     <tr>
         <td>№ заявки</td>
         <td>Дата</td>
+        <?if($request==1):?>
+        <td>Период</td>
+        <?endif;?>
         <td>Тип</td>
         <?if($request==2):?>
         <td>Скачать</td>
@@ -17,6 +20,9 @@
         <tr>
             <td><?=$item->id;?></td>
             <td><?=MYDate::contactsDate($item->date)?></td>
+            <?if($request==1):?>
+                <td>с <b><?=MYDate::contactsDate($item->date_start)?></b> по <b><?=MYDate::contactsDate($item->date_end)?></b></td>
+            <?endif;?>
             <td><?=$item->name;?></td>
         <?if($request==2):?>
             <td> <?if($img = MYChtml::getImage('orders/'.$item->id,'Order')):?><a href="<?php echo Yii::app()->request->baseUrl;?>/uploads/<?=$img;?>" download>Cкачать</a><?endif?></td>

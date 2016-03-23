@@ -14,7 +14,7 @@ class MYFiles
 
         self::clearDir($info_dir);
 
-        if(!is_dir($info_dir)) mkdir($info_dir,7777);
+        if(!is_dir($info_dir)) mkdir($info_dir,0770);
         return(!$object->saveAs($info_dir.strtolower($object))) ? false : true;
     }
 

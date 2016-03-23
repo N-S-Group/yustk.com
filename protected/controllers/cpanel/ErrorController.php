@@ -14,7 +14,7 @@ class ErrorController extends CController
     public function actionIndex()
     {
 
-    $this->render("index");
+        $this->renderPartial('application.views.404.404');
     }
 
 }

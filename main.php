@@ -91,7 +91,7 @@ return array(
         ),
         'settings'=>array(
             "mailDirector" => "mike.anapa@gmail.com",
-            "mailMain"     => "bablgum@mail.ru"
+            "mailMain"     => "mike.anapa@gmail.com"
         )
     ),
 

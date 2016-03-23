@@ -63,6 +63,7 @@
             <li class="gallery_front"><a title="" href="<?=$this->createUrl('service/index');?>"><span>Услуги</span></a></li>
             <li class="gallery_front"><a title="" href="<?=$this->createUrl('clientagreements/index');?>"><span>Договора</span></a></li>
             <li class="gallery_front"><a title="" href="<?=$this->createUrl('standartagreements/index');?>"><span>Типовые договора</span></a></li>
+        <li class="gallery_front"><a title="" href="<?=$this->createUrl('orders/index');?>"><span>Список заявок</span></a></li>
     </ul>
 
 </div>

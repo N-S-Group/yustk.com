@@ -79,6 +79,9 @@ class MYChtml extends  CHtml
     public static function toUTF8($arg) {
         return iconv("windows-1251","UTF-8",$arg);
     }
+    public static function fromUTF8($arg) {
+        return iconv("UTF-8","windows-1251",$arg);
+    }
 
     public static function toWindows1251($arg) {
         return iconv("UTF-8","windows-1251",$arg);
