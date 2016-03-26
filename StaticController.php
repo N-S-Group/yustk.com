@@ -12,7 +12,7 @@ class StaticController extends Controller
     public $isCabinet = false;
     public $priceString = "";
     public $description = "ﬁ—“ ";
-    public $path = "http://localhost/yustk.com";
+    public $path = "http://yustk.com";
     public $courSection = "";
     public $courCount = 4;
 

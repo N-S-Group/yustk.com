@@ -39,6 +39,9 @@ class RequestController extends ControlerCPanel
         $this->renderPartial('table',array("d"=>$_POST['d'],'request'=>$_POST['request']));
     }
 
+    public function actionshowInvoices(){
+        $this->renderPartial('table_invoices',array("d"=>$_POST['d']));
+    }
 
     public function createPdf($model){
         $user = Clients::model()->findByPk( Yii::app()->user->getId() );
@@ -61,4 +64,6 @@ class RequestController extends ControlerCPanel
         $pdf->Output(getcwd()."/uploads/orders/".$model->id."/Order.pdf", "F");
        // return $model->id;
     }
+
+
 }

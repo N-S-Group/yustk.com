@@ -52,20 +52,17 @@
 
 <!-- Left side content -->
 <div id="leftSide">
-
-
     <div class="sidebarSep mt0"></div>
 <!-- Left side content -->
-
     <ul class="nav" id="menu">
             <li class="ui"><a title="" href="<?=$this->createUrl('users/index');?>"><span>Пользователи</span></a></li>
             <li class="comments"><a title="" href="<?=$this->createUrl('comments/index');?>"><span>Отзывы</span></a></li>
             <li class="gallery_front"><a title="" href="<?=$this->createUrl('service/index');?>"><span>Услуги</span></a></li>
             <li class="gallery_front"><a title="" href="<?=$this->createUrl('clientagreements/index');?>"><span>Договора</span></a></li>
             <li class="gallery_front"><a title="" href="<?=$this->createUrl('standartagreements/index');?>"><span>Типовые договора</span></a></li>
-        <li class="gallery_front"><a title="" href="<?=$this->createUrl('orders/index');?>"><span>Список заявок</span></a></li>
+            <li class="gallery_front"><a title="" href="<?=$this->createUrl('orders/index');?>"><span>Список заявок</span></a></li>
+            <li class="gallery_front"><a title="" href="<?=$this->createUrl('invoice/index');?>"><span>Счета</span></a></li>
     </ul>
-
 </div>
 
 

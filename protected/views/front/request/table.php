@@ -1,4 +1,4 @@
-<?=header('Content-Type: text/html; charset=windows-1251')?>
+<?=header('Content-Type: text/html; charset=windows-1251');?>
 <?if($r = Orders::model()->findAll("`agreement_id`=:agreement_id and `type`=:type",array(":agreement_id"=>$d,":type"=>$request))):?>
     <b class="blues">История заявок</b><br>
 <table class="price">

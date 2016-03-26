@@ -27,7 +27,30 @@ class MYDate
         $e = explode("-",$data);
         return $e[2].".".$e[1].".".$e[0];
     }
-		
+
+    static function DateInBase($data){
+        $e = explode(".",$data);
+        return $e[2]."-".$e[1]."-".$e[0];
+    }
+
+    static function getMounth($date){
+        $e = explode("-",$date);
+        $array=array('01'=>"€нварь",
+            '02'=>"февраль",
+            '03'=>"март",
+            '04'=>"апрель",
+            '05'=>"май",
+            '06'=>"июнь",
+            '07'=>"июль",
+            '08'=>"август",
+            '09'=>"сент€брь",
+            '10'=>"окт€брь",
+            '11'=>"но€брь",
+            '12'=>"декабрь");
+        return $array[$e[1]];
+
+    }
+
 		static function _date_range_limit_days($base, $result)
 		{
 		    $days_in_month_leap = array(31, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
